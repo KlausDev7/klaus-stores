@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KLAUS — Streetwear</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&family=Inter:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #FFFFFF;
+    --text: #111111;
+    --mid: #888888;
+    --light: #E8E8E8;
+    --dark-bg: #111111;
+    --dark-text: #F5F5F5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 28px;
+    height: 64px;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--light);
+  }
+
+  /* left cluster */
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 6px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  /* search bar */
+  .nav-search {
+    display: flex;
+    align-items: center;
+    background: #f4f4f4;
+    border-radius: 999px;
+    padding: 7px 16px;
+    gap: 8px;
+    width: 220px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .nav-search:focus-within {
+    background: #fff;
+    border-color: var(--light);
+  }
+  .nav-search svg { flex-shrink: 0; color: var(--mid); }
+  .nav-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.82rem;
+    color: var(--text);
+    width: 100%;
+  }
+  .nav-search input::placeholder { color: #aaa; }
+
+  /* center logo */
+  .nav-logo {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.22em;
+    color: var(--text);
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    justify-self: center;
+  }
+
+  /* right cluster */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .nav-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    transition: background 0.18s;
+    position: relative;
+  }
+  .nav-icon-btn:hover { background: #f0f0f0; }
+
+  .cart-badge {
+    position: absolute;
+    top: 4px; right: 4px;
+    width: 16px; height: 16px;
+    background: var(--text);
+    color: #fff;
+    border-radius: 50%;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  /* ── DRAWER MENU ── */
+  .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+  .drawer {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: 300px;
+    background: #fff;
+    z-index: 400;
+    transform: translateX(-100%);
+    transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    box-shadow: 4px 0 24px rgba(0,0,0,0.08);
+  }
+  .drawer.open { transform: translateX(0); }
+
+  .drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--light);
+  }
+
+  .drawer-header span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .drawer-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .drawer-nav {
+    list-style: none;
+    padding: 16px 0;
+    flex: 1;
+  }
+
+  .drawer-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 24px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: background 0.15s, color 0.15s;
+  }
+  .drawer-nav li a:hover { background: #f8f8f8; }
+
+  .drawer-nav li a svg { color: var(--mid); flex-shrink: 0; }
+
+  .drawer-nav .divider {
+    height: 1px;
+    background: var(--light);
+    margin: 8px 24px;
+  }
+
+  .drawer-nav li .sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding: 10px 24px 4px;
+    display: block;
+  }
+
+  /* ── PROFILE PANEL ── */
+  .profile-panel {
+    position: fixed;
+    top: 64px; right: 0;
+    width: 280px;
+    background: #fff;
+    border-left: 1px solid var(--light);
+    border-bottom: 1px solid var(--light);
+    z-index: 300;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    box-shadow: -4px 4px 24px rgba(0,0,0,0.07);
+    border-radius: 0 0 0 12px;
+  }
+  .profile-panel.open { transform: translateX(0); }
+
+  .profile-head {
+    padding: 22px 22px 16px;
+    border-bottom: 1px solid var(--light);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .profile-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--mid);
+  }
+
+  .profile-info p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .profile-info small {
+    color: var(--mid);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+  }
+
+  .profile-menu {
+    list-style: none;
+    padding: 8px 0 12px;
+  }
+
+  .profile-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 20px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.83rem;
+    letter-spacing: 0.02em;
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+  .profile-menu li a:hover { background: #f8f8f8; color: var(--text); }
+  .profile-menu li a svg { color: var(--mid); flex-shrink: 0; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-top: 64px;
+  }
+
+  .hero-visual {
+    position: relative;
+    overflow: hidden;
+    background: #c8c8c8;
+  }
+
+  .hero-visual--full {
+    width: 100%;
+    min-height: calc(100vh - 64px);
+  }
+
+  .hero-visual-bg {
+    width: 100%;
+    height: 100%;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* swap background-color for background-image when you have the photo */
+    background: #c8c8c8;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-placeholder-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+
+
+  /* ── FLOATING SEARCH ── */
+  .fab-search {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 150;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: var(--text);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    pointer-events: none;
+  }
+  .fab-search.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  .fab-search:hover { background: #333; }
+
+  /* search modal */
+  .search-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 120px;
+  }
+  .search-modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .search-modal {
+    background: #fff;
+    border-radius: 12px;
+    padding: 6px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 560px;
+    max-width: 90vw;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    transform: translateY(-10px);
+    transition: transform 0.25s;
+  }
+  .search-modal-overlay.open .search-modal { transform: translateY(0); }
+  .search-modal input {
+    border: none;
+    outline: none;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    flex: 1;
+    padding: 14px 0;
+    background: transparent;
+  }
+  .search-modal input::placeholder { color: #bbb; }
+  .search-modal-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    padding: 4px;
+  }
+
+  /* ── PRODUTOS ── */
+  .products-section { padding: 80px 60px; background: var(--bg); }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .section-nav-link {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .section-nav-link a {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    border-bottom: 1px solid var(--light);
+    padding-bottom: 3px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .section-nav-link a:hover { color: var(--text); border-color: var(--text); }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .product-card { cursor: pointer; }
+
+  .product-img {
+    aspect-ratio: 3/4;
+    background: #ececec;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .product-img-bg {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover .product-img-bg { transform: scale(1.04); }
+
+  .product-tag {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--text);
+    color: var(--bg);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    padding: 4px 9px;
+    text-transform: uppercase;
+  }
+
+  .product-info { padding: 0 1px; }
+
+  .product-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .product-price {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    font-size: 0.82rem;
+    color: var(--mid);
+    margin-bottom: 12px;
+  }
+
+  .product-add-btn {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--light);
+    padding: 9px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .product-add-btn:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+  /* ── CATEGORIES ── */
+  .cats-section { padding: 0 60px 80px; background: var(--bg); }
+
+  .cats-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2px;
+    height: 400px;
+  }
+
+  .cat-block {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--dark-bg);
+  }
+  .cat-bg {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    transition: transform 0.4s ease;
+    background: #1a1a1a;
+  }
+  .cat-block:hover .cat-bg { transform: scale(1.07); }
+  .cat-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 22px;
+    background: linear-gradient(0deg, rgba(10,10,10,0.88) 0%, transparent 100%);
+  }
+  .cat-label h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 1.1rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #f5f5f5;
+    transition: color 0.2s;
+  }
+  .cat-label p {
+    font-size: 0.68rem;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-top: 4px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    margin: 0 60px 100px;
+    background: var(--dark-bg);
+    padding: 70px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+  .newsletter-text h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 1.1;
+    color: var(--dark-text);
+  }
+  .newsletter-text h2 span { font-style: italic; }
+  .newsletter-text p {
+    color: #666;
+    margin-top: 12px;
+    font-size: 0.86rem;
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .newsletter-form { display: flex; flex-shrink: 0; }
+  .newsletter-input {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-right: none;
+    color: #f5f5f5;
+    padding: 15px 22px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.86rem;
+    width: 280px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-input:focus { border-color: #666; }
+  .newsletter-input::placeholder { color: #444; }
+  .newsletter-submit {
+    background: var(--dark-text);
+    color: var(--dark-bg);
+    border: none;
+    padding: 15px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .newsletter-submit:hover { background: #fff; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--light);
+    padding: 60px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    background: var(--bg);
+  }
+  .footer-brand p {
+    color: var(--mid);
+    font-size: 0.83rem;
+    line-height: 1.8;
+    margin-top: 14px;
+    max-width: 240px;
+    font-style: italic;
+  }
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 14px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.86rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--mid); }
+
+  .footer-bottom {
+    padding: 22px 60px;
+    border-top: 1px solid var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+  }
+  .footer-bottom p {
+    color: var(--mid);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  @media (max-width: 900px) {
+    .nav-search { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-visual { height: 300px; }
+    .hero-text { padding: 60px 24px; }
+    .products-section, .cats-section { padding: 60px 24px; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .cats-grid { grid-template-columns: 1fr; height: auto; }
+    .cat-bg { height: 200px; }
+    .newsletter { flex-direction: column; margin: 0 24px 60px; padding: 40px; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-input { width: 100%; border-right: 1px solid #333; border-bottom: none; }
+    footer { grid-template-columns: 1fr 1fr; padding: 40px 24px; gap: 40px; }
+    .footer-bottom { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+  /* ── PAGES ── */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding-top: 64px;
+  }
+  .page.active { display: block; }
+
+  .page-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .page-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    margin-bottom: 48px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  .page-back:hover { color: var(--text); }
+
+  .page-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 60px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light);
+  }
+
+  .page-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .page-empty svg { color: var(--light); }
+
+  .page-empty p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* home page wrapper */
+  #page-inicio { display: block; }
+</style>
+</head>
+<body>
+
+<!-- DRAWER OVERLAY -->
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+
+<!-- SEARCH MODAL -->
+<div class="search-modal-overlay" id="searchModal" onclick="closeSearch(event)">
+  <div class="search-modal">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" placeholder="Pesquisar peças, coleções..." id="searchInput" autofocus>
+    <button class="search-modal-close" onclick="closeSearchBtn()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- FLOATING SEARCH -->
+<button class="fab-search" id="fabSearch" onclick="openSearch()" aria-label="Pesquisar">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+</button>
+
+<!-- DRAWER MENU -->
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <span>Menu</span>
+    <button class="drawer-close" onclick="closeDrawer()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <ul class="drawer-nav">
+    <li><a href="#" onclick="goTo('inicio')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Início
+    </a></li>
+    <li><div class="divider"></div></li>
+    <li><span class="sub">Loja</span></li>
+    <li><a href="#" onclick="goTo('novidades')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Novidades
+    </a></li>
+    <li><a href="#" onclick="goTo('colecoes')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Coleções
+    </a></li>
+    <li><a href="#" onclick="goTo('drops')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Drops
+    </a></li>
+    <li><a href="#" onclick="goTo('sale')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      Sale
+    </a></li>
+    <li><div class="divider"></div></li>
+    <li><span class="sub">Informações</span></li>
+    <li><a href="#" onclick="goTo('sobre')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Sobre a Klaus
+    </a></li>
+    <li><a href="#" onclick="goTo('contato')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Contato
+    </a></li>
+  </ul>
+</div>
+
+<!-- PROFILE PANEL -->
+<div class="profile-panel" id="profilePanel">
+  <div class="profile-head">
+    <div class="profile-avatar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="profile-info">
+      <p>Minha Conta</p>
+      <small>Entre ou cadastre-se</small>
+    </div>
+  </div>
+  <ul class="profile-menu">
+    <li><a href="#" onclick="goToProfile('entrar')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Entrar / Cadastrar
+    </a></li>
+    <li><a href="#" onclick="goToProfile('pedidos')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Meus Pedidos
+    </a></li>
+    <li><a href="#" onclick="goToProfile('favoritos')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Favoritos
+    </a></li>
+    <li><a href="#" onclick="goToProfile('configuracoes')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      Configurações
+    </a></li>
+  </ul>
+</div>
+
+<!-- NAV -->
+<nav>
+  <!-- left -->
+  <div class="nav-left">
+    <button class="hamburger" onclick="openDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Pesquisar...">
+    </div>
+  </div>
+
+  <!-- center logo -->
+  <a class="nav-logo" href="#">Klaus</a>
+
+  <!-- right -->
+  <div class="nav-right">
+    <button class="nav-icon-btn" onclick="toggleProfile()" aria-label="Perfil">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </button>
+    <button class="nav-icon-btn" aria-label="Carrinho">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-badge">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══ HOME PAGE ══ -->
+<div id="page-inicio" class="page active">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-visual hero-visual--full">
+    <div class="hero-visual-bg">
+      <span class="hero-placeholder-label">Sua imagem aqui</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="products-section">
+  <div class="section-header">
+    <div class="section-title">DESTAQUES</div>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-bg">🧥</div>
+        <div class="product-tag">Novo</div>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Cargo Oversized</p>
+        <p class="product-price">R$ 349,00</p>
+        <button class="product-add-btn">Adicionar</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-bg">👕</div>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Hoodie Acid Wash</p>
+        <p class="product-price">R$ 179,00</p>
+        <button class="product-add-btn">Adicionar</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-bg">👖</div>
+        <div class="product-tag">-20%</div>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Calça Wide Leg</p>
+        <p class="product-price">R$ 259,00</p>
+        <button class="product-add-btn">Adicionar</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="product-img">
+        <div class="product-img-bg">🧢</div>
+      </div>
+      <div class="product-info">
+        <p class="product-name">Cap 6 Panel Logo</p>
+        <p class="product-price">R$ 129,00</p>
+        <button class="product-add-btn">Adicionar</button>
+      </div>
+    </div>
+  </div>
+  <div class="section-nav-link">
+    <a href="#">Navegue a coleção</a>
+  </div>
+</section>
+
+<section class="cats-section">
+  <div class="section-header">
+    <div class="section-title">CATEGORIAS</div>
+  </div>
+  <div class="cats-grid">
+    <div class="cat-block"><div class="cat-bg">🧥</div><div class="cat-label"><h3>Outerwear</h3><p>32 produtos</p></div></div>
+    <div class="cat-block"><div class="cat-bg">👕</div><div class="cat-label"><h3>Tops</h3><p>58 produtos</p></div></div>
+    <div class="cat-block"><div class="cat-bg">🧢</div><div class="cat-label"><h3>Acessórios</h3><p>24 produtos</p></div></div>
+  </div>
+  <div class="section-nav-link">
+    <a href="#">Navegue a coleção</a>
+  </div>
+</section>
+
+<div class="newsletter">
+  <div class="newsletter-text">
+    <h2>Fique por<br><span>Dentro</span></h2>
+    <p>Novos drops, promoções exclusivas e conteúdo das ruas.<br>Sem spam. Só o que importa.</p>
+  </div>
+  <div class="newsletter-form">
+    <input class="newsletter-input" type="email" placeholder="seu@email.com">
+    <button class="newsletter-submit">Entrar na lista</button>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <a class="nav-logo" href="#" style="text-decoration:none;">Klaus</a>
+    <p>Streetwear para quem define as regras. Desde 2019, nas ruas de São Paulo.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Loja</h4>
+    <ul><li><a href="#">Novidades</a></li><li><a href="#">Coleções</a></li><li><a href="#">Sale</a></li><li><a href="#">Drops</a></li></ul>
+  </div>
+  <div class="footer-col">
+    <h4>Suporte</h4>
+    <ul><li><a href="#">Rastreamento</a></li><li><a href="#">Trocas</a></li><li><a href="#">Tamanhos</a></li><li><a href="#">Contato</a></li></ul>
+  </div>
+  <div class="footer-col">
+    <h4>Social</h4>
+    <ul><li><a href="#">Instagram</a></li><li><a href="#">TikTok</a></li><li><a href="#">YouTube</a></li></ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Klaus. Todos os direitos reservados.</p>
+  <p>Feito nas ruas de São Paulo</p>
+</div>
+
+</div><!-- end #page-inicio -->
+
+<!-- ══ NOVIDADES ══ -->
+<div id="page-novidades" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="goTo('inicio')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Novidades</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <p>Em breve — novos itens chegando</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ COLEÇÕES ══ -->
+<div id="page-colecoes" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="goTo('inicio')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Coleções</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <p>Coleções sendo preparadas</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ DROPS ══ -->
+<div id="page-drops" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="goTo('inicio')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Drops</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <p>Próximo drop em breve</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SALE ══ -->
+<div id="page-sale" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="goTo('inicio')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Sale</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <p>Nenhuma peça em promoção no momento</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SOBRE ══ -->
+<div id="page-sobre" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="goTo('inicio')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Sobre a Klaus</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p>Nossa história em breve</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTATO ══ -->
+<div id="page-contato" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="goTo('inicio')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Contato</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <p>contato@klaus.com.br</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERFIL: ENTRAR ══ -->
+<div id="page-entrar" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="closeProfilePage()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Entrar / Cadastrar</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <p>Área de login em construção</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERFIL: PEDIDOS ══ -->
+<div id="page-pedidos" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="closeProfilePage()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Meus Pedidos</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>Nenhum pedido encontrado</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERFIL: FAVORITOS ══ -->
+<div id="page-favoritos" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="closeProfilePage()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Favoritos</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <p>Nenhum favorito salvo</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERFIL: CONFIGURAÇÕES ══ -->
+<div id="page-configuracoes" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="closeProfilePage()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Configurações</div>
+    <div class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      <p>Configurações em breve</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── PAGE NAVIGATION ──
+  let lastMainPage = 'inicio';
+
+  function goTo(pageId) {
+    closeDrawer();
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + pageId);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // track last main page (not profile sub-pages)
+    const profilePages = ['entrar','pedidos','favoritos','configuracoes'];
+    if (!profilePages.includes(pageId)) lastMainPage = pageId;
+  }
+
+  function goToProfile(subPage) {
+    document.getElementById('profilePanel').classList.remove('open');
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.classList.remove('active'));
+    const target = document.getElementById('page-' + subPage);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function closeProfilePage() {
+    goTo(lastMainPage);
+  }
+
+  // logo click → home
+  document.querySelector('.nav-logo').addEventListener('click', function(e) {
+    e.preventDefault();
+    goTo('inicio');
+  });
+
+  // Drawer
+  function openDrawer() {
+    document.getElementById('drawer').classList.add('open');
+    document.getElementById('drawerOverlay').classList.add('open');
+    document.getElementById('profilePanel').classList.remove('open');
+  }
+  function closeDrawer() {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('drawerOverlay').classList.remove('open');
+  }
+
+  // Profile panel
+  function toggleProfile() {
+    document.getElementById('profilePanel').classList.toggle('open');
+    closeDrawer();
+  }
+  document.addEventListener('click', function(e) {
+    const panel = document.getElementById('profilePanel');
+    const btn = e.target.closest('[onclick="toggleProfile()"]');
+    if (!btn && !panel.contains(e.target)) panel.classList.remove('open');
+  });
+
+  // Floating search — show after scrolling past nav
+  const fabSearch = document.getElementById('fabSearch');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 120) fabSearch.classList.add('visible');
+    else fabSearch.classList.remove('visible');
+  });
+
+  // Search modal
+  function openSearch() {
+    const modal = document.getElementById('searchModal');
+    modal.classList.add('open');
+    setTimeout(() => document.getElementById('searchInput').focus(), 80);
+  }
+  function closeSearchBtn() {
+    document.getElementById('searchModal').classList.remove('open');
+  }
+  function closeSearch(e) {
+    if (e.target === document.getElementById('searchModal')) {
+      document.getElementById('searchModal').classList.remove('open');
+    }
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') document.getElementById('searchModal').classList.remove('open');
+  });
+</script>
+</body>
+</html>
