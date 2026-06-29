@@ -788,8 +788,17 @@
     color: var(--mid);
   }
 
-  /* home page wrapper */
-  #page-inicio { display: block; }
+  .products-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding: 60px 0;
+  }
 </style>
 </head>
 <body>
@@ -935,49 +944,8 @@
   <div class="section-header">
     <div class="section-title">DESTAQUES</div>
   </div>
-  <div class="products-grid">
-    <div class="product-card">
-      <div class="product-img">
-        <div class="product-img-bg">🧥</div>
-        <div class="product-tag">Novo</div>
-      </div>
-      <div class="product-info">
-        <p class="product-name">Cargo Oversized</p>
-        <p class="product-price">R$ 349,00</p>
-        <button class="product-add-btn">Adicionar</button>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">
-        <div class="product-img-bg">👕</div>
-      </div>
-      <div class="product-info">
-        <p class="product-name">Hoodie Acid Wash</p>
-        <p class="product-price">R$ 179,00</p>
-        <button class="product-add-btn">Adicionar</button>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">
-        <div class="product-img-bg">👖</div>
-        <div class="product-tag">-20%</div>
-      </div>
-      <div class="product-info">
-        <p class="product-name">Calça Wide Leg</p>
-        <p class="product-price">R$ 259,00</p>
-        <button class="product-add-btn">Adicionar</button>
-      </div>
-    </div>
-    <div class="product-card">
-      <div class="product-img">
-        <div class="product-img-bg">🧢</div>
-      </div>
-      <div class="product-info">
-        <p class="product-name">Cap 6 Panel Logo</p>
-        <p class="product-price">R$ 129,00</p>
-        <button class="product-add-btn">Adicionar</button>
-      </div>
-    </div>
+  <div class="products-grid" id="products-grid">
+    <div class="products-loading">Carregando produtos...</div>
   </div>
   <div class="section-nav-link">
     <a href="#">Navegue a coleção</a>
@@ -1185,7 +1153,84 @@
 </div>
 
 <script>
-  // ── PAGE NAVIGATION ──
+  // ── SUPABASE CONFIG ──
+  const SUPABASE_URL = 'https://qyimirljvhagsqhwijxr.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5aW1pcmxqdmhhZ3NxaHdpanhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4MDU4NjUsImV4cCI6MjA2NjM4MTg2NX0.9Sy8UiGGnNZ1YH7QlvDLNKj7rICQZz-0RzBhCBJmw4Y';
+
+  async function carregarProdutos() {
+    const grid = document.getElementById('products-grid');
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/produtos?select=*&order=nome.asc`, {
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`
+        }
+      });
+      const produtos = await res.json();
+
+      if (!produtos.length) {
+        grid.innerHTML = '<div class="products-loading">Nenhum produto cadastrado ainda</div>';
+        return;
+      }
+
+      grid.innerHTML = produtos.map(p => `
+        <div class="product-card">
+          <div class="product-img">
+            ${p.imagem_url
+              ? `<img src="${p.imagem_url}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;">`
+              : `<div class="product-img-bg" style="background:#ececec;font-size:60px;">🧥</div>`
+            }
+            ${p.tag ? `<div class="product-tag">${p.tag}</div>` : ''}
+          </div>
+          <div class="product-info">
+            <p class="product-name">${p.nome}</p>
+            <p class="product-price">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</p>
+            <button class="product-add-btn" onclick="adicionarCarrinho(${JSON.stringify(p).replace(/"/g, '&quot;')})">Adicionar</button>
+          </div>
+        </div>
+      `).join('');
+    } catch (e) {
+      grid.innerHTML = '<div class="products-loading">Erro ao carregar produtos</div>';
+    }
+  }
+
+  // ── CARRINHO ──
+  let carrinho = [];
+
+  function adicionarCarrinho(produto) {
+    const existente = carrinho.find(i => i.nome === produto.nome);
+    if (existente) {
+      existente.qty++;
+    } else {
+      carrinho.push({ ...produto, qty: 1 });
+    }
+    atualizarBadgeCarrinho();
+    mostrarToast(`${produto.nome} adicionado`);
+  }
+
+  function atualizarBadgeCarrinho() {
+    const total = carrinho.reduce((s, i) => s + i.qty, 0);
+    document.querySelector('.cart-badge').textContent = total;
+  }
+
+  function mostrarToast(msg) {
+    const t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = `
+      position:fixed; bottom:90px; right:32px; z-index:999;
+      background:#111; color:#fff; padding:12px 20px;
+      font-family:'Inter',sans-serif; font-weight:300;
+      font-size:0.78rem; letter-spacing:0.1em;
+      border-radius:4px; opacity:0;
+      transition: opacity 0.3s;
+    `;
+    document.body.appendChild(t);
+    setTimeout(() => t.style.opacity = '1', 10);
+    setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 2500);
+  }
+
+  // carregar produtos ao iniciar
+  carregarProdutos();
   let lastMainPage = 'inicio';
 
   function goTo(pageId) {
