@@ -1112,6 +1112,10 @@
     </div>
 
     <div style="display:flex;flex-direction:column;gap:16px;">
+      <div id="campo-nome" style="display:none;">
+        <label style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:8px;">Nome</label>
+        <input id="auth-nome" type="text" placeholder="Seu nome" style="width:100%;padding:14px 16px;border:1px solid var(--light);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;color:var(--text);transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--text)'" onblur="this.style.borderColor='var(--light)'">
+      </div>
       <div>
         <label style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:8px;">E-mail</label>
         <input id="auth-email" type="email" placeholder="seu@email.com" style="width:100%;padding:14px 16px;border:1px solid var(--light);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;color:var(--text);transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--text)'" onblur="this.style.borderColor='var(--light)'">
@@ -1263,11 +1267,12 @@
   }
 
   function atualizarUILogado(user) {
+    const nome = user.user_metadata?.nome || user.email.split('@')[0];
     const info = document.querySelector('.profile-info p');
     const sub = document.querySelector('.profile-info small');
     const menuEntrar = document.getElementById('menu-entrar');
     const menuSair = document.getElementById('menu-sair');
-    if (info) info.textContent = user.email.split('@')[0];
+    if (info) info.textContent = nome;
     if (sub) sub.textContent = user.email;
     if (menuEntrar) menuEntrar.style.display = 'none';
     if (menuSair) menuSair.style.display = 'flex';
@@ -1300,10 +1305,14 @@
     mostrarToast('Bem-vindo de volta!');
   }
 
-  async function fazerCadastro(email, senha) {
+  async function fazerCadastro(email, senha, nome) {
     const msgEl = document.getElementById('auth-msg');
     msgEl.textContent = '';
-    const { error } = await sb.auth.signUp({ email, password: senha });
+    const { error } = await sb.auth.signUp({
+      email,
+      password: senha,
+      options: { data: { nome } }
+    });
     if (error) {
       msgEl.textContent = 'Erro ao cadastrar. Tente outro e-mail.';
       return;
@@ -1313,7 +1322,7 @@
       usuarioAtual = session.user;
       atualizarUILogado(session.user);
       goTo(lastMainPage);
-      mostrarToast('Conta criada com sucesso!');
+      mostrarToast(`Bem-vindo, ${nome}!`);
     } else {
       msgEl.textContent = 'Verifique seu e-mail para confirmar o cadastro.';
     }
@@ -1425,6 +1434,7 @@
     const btnLogin = document.getElementById('tab-login');
     const btnCad = document.getElementById('tab-cadastro');
     const btnSubmit = document.getElementById('auth-btn');
+    const campoNome = document.getElementById('campo-nome');
     document.getElementById('auth-msg').textContent = '';
     if (aba === 'login') {
       btnLogin.style.borderBottom = '1px solid var(--text)';
@@ -1432,24 +1442,31 @@
       btnCad.style.borderBottom = 'none';
       btnCad.style.color = 'var(--mid)';
       btnSubmit.textContent = 'Entrar';
+      campoNome.style.display = 'none';
     } else {
       btnCad.style.borderBottom = '1px solid var(--text)';
       btnCad.style.color = 'var(--text)';
       btnLogin.style.borderBottom = 'none';
       btnLogin.style.color = 'var(--mid)';
       btnSubmit.textContent = 'Criar conta';
+      campoNome.style.display = 'block';
     }
   }
 
   function submitAuth() {
     const email = document.getElementById('auth-email').value.trim();
     const senha = document.getElementById('auth-senha').value;
+    const nome = document.getElementById('auth-nome')?.value.trim() || '';
     if (!email || !senha) {
       document.getElementById('auth-msg').textContent = 'Preencha e-mail e senha.';
       return;
     }
+    if (abaAtual === 'cadastro' && !nome) {
+      document.getElementById('auth-msg').textContent = 'Preencha seu nome.';
+      return;
+    }
     if (abaAtual === 'login') fazerLogin(email, senha);
-    else fazerCadastro(email, senha);
+    else fazerCadastro(email, senha, nome);
   }
 </script>
 </body>
