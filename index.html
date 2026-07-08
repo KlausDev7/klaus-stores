@@ -788,7 +788,162 @@
     color: var(--mid);
   }
 
-  .products-loading {
+  /* ── CARRINHO ── */
+  .cart-page-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .cart-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .cart-empty svg { color: var(--light); }
+  .cart-empty p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light);
+  }
+
+  .cart-item-img {
+    width: 80px;
+    height: 100px;
+    background: #ececec;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .cart-item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cart-item-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .cart-item-price {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    color: var(--mid);
+    margin-bottom: 12px;
+  }
+
+  .cart-qty {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid var(--light);
+    width: fit-content;
+  }
+
+  .cart-qty button {
+    background: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .cart-qty button:hover { background: #f5f5f5; }
+
+  .cart-qty span {
+    width: 30px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+  }
+
+  .cart-item-remove {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--mid);
+    padding: 4px;
+    transition: color 0.2s;
+  }
+  .cart-item-remove:hover { color: var(--text); }
+
+  .cart-summary {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .cart-total {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .cart-total strong {
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-left: 16px;
+  }
+
+  .cart-checkout-btn {
+    background: var(--text);
+    color: #fff;
+    border: none;
+    padding: 16px 48px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .cart-checkout-btn:hover { background: #333; }
+
+  .cart-checkout-btn:disabled {
+    background: var(--light);
+    color: var(--mid);
+    cursor: not-allowed;
+  }
     grid-column: 1 / -1;
     text-align: center;
     font-family: 'Inter', sans-serif;
@@ -923,7 +1078,7 @@
     <button class="nav-icon-btn" onclick="toggleProfile()" aria-label="Perfil">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     </button>
-    <button class="nav-icon-btn" aria-label="Carrinho">
+    <button class="nav-icon-btn" onclick="goTo('carrinho')" aria-label="Carrinho">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       <span class="cart-badge">0</span>
     </button>
@@ -1175,6 +1330,18 @@
   </div>
 </div>
 
+<!-- ══ CARRINHO ══ -->
+<div id="page-carrinho" class="page">
+  <div class="cart-page-inner">
+    <button class="page-back" onclick="goTo('inicio')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Continuar comprando
+    </button>
+    <div class="page-title">Carrinho</div>
+    <div id="cart-content"></div>
+  </div>
+</div>
+
 <script>
   // ── SUPABASE CONFIG ──
   const SUPABASE_URL = 'https://qyimirljvhagsqhwijxr.supabase.co';
@@ -1228,12 +1395,85 @@
       carrinho.push({ ...produto, qty: 1 });
     }
     atualizarBadgeCarrinho();
+    renderCarrinho();
     mostrarToast(`${produto.nome} adicionado`);
+  }
+
+  function removerCarrinho(nome) {
+    carrinho = carrinho.filter(i => i.nome !== nome);
+    atualizarBadgeCarrinho();
+    renderCarrinho();
+  }
+
+  function alterarQty(nome, delta) {
+    const item = carrinho.find(i => i.nome === nome);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) removerCarrinho(nome);
+    else { atualizarBadgeCarrinho(); renderCarrinho(); }
   }
 
   function atualizarBadgeCarrinho() {
     const total = carrinho.reduce((s, i) => s + i.qty, 0);
     document.querySelector('.cart-badge').textContent = total;
+  }
+
+  function renderCarrinho() {
+    const el = document.getElementById('cart-content');
+    if (!el) return;
+    if (!carrinho.length) {
+      el.innerHTML = `
+        <div class="cart-empty">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <p>Seu carrinho está vazio</p>
+        </div>`;
+      return;
+    }
+
+    const total = carrinho.reduce((s, i) => s + (i.preco * i.qty), 0);
+    const itens = carrinho.map(i => `
+      <div class="cart-item">
+        <div class="cart-item-img">
+          ${i.imagem_url
+            ? `<img src="${i.imagem_url}" alt="${i.nome}">`
+            : '🧥'}
+        </div>
+        <div>
+          <p class="cart-item-name">${i.nome}</p>
+          <p class="cart-item-price">R$ ${Number(i.preco).toFixed(2).replace('.', ',')}</p>
+          <div class="cart-qty">
+            <button onclick="alterarQty('${i.nome}', -1)">−</button>
+            <span>${i.qty}</span>
+            <button onclick="alterarQty('${i.nome}', 1)">+</button>
+          </div>
+        </div>
+        <button class="cart-item-remove" onclick="removerCarrinho('${i.nome}')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+    `).join('');
+
+    el.innerHTML = `
+      ${itens}
+      <div class="cart-summary">
+        <p class="cart-total">Total <strong>R$ ${total.toFixed(2).replace('.', ',')}</strong></p>
+        <button class="cart-checkout-btn" onclick="irParaCheckout()">Finalizar compra</button>
+      </div>`;
+  }
+
+  function irParaCheckout() {
+    if (!usuarioAtual) {
+      mostrarToast('Entre na sua conta para finalizar');
+      setTimeout(() => goToProfile('entrar'), 800);
+      return;
+    }
+    mostrarToast('Integração com pagamento em breve!');
   }
 
   function mostrarToast(msg) {
@@ -1354,6 +1594,7 @@
     // track last main page (not profile sub-pages)
     const profilePages = ['entrar','pedidos','favoritos','configuracoes'];
     if (!profilePages.includes(pageId)) lastMainPage = pageId;
+    if (pageId === 'carrinho') renderCarrinho();
   }
 
   function goToProfile(subPage) {
