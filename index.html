@@ -1554,14 +1554,50 @@
     `).join('');
   }
 
-  function irParaCheckout() {
+  async function irParaCheckout() {
     if (!usuarioAtual) {
       closeCart();
       mostrarToast('Entre na sua conta para finalizar');
       setTimeout(() => goToProfile('entrar'), 800);
       return;
     }
-    mostrarToast('Integração com pagamento em breve!');
+
+    if (!carrinho.length) {
+      mostrarToast('Seu carrinho está vazio');
+      return;
+    }
+
+    const btn = document.querySelector('.cart-checkout-btn');
+    btn.disabled = true;
+    btn.textContent = 'Processando...';
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/criar-preferencia`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_KEY}`
+        },
+        body: JSON.stringify({
+          itens: carrinho,
+          email: usuarioAtual.email
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.sandbox_url) {
+        window.location.href = data.sandbox_url;
+      } else if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('URL de pagamento não retornada');
+      }
+    } catch (err) {
+      mostrarToast('Erro ao conectar com pagamento. Tente novamente.');
+      btn.disabled = false;
+      btn.textContent = 'Finalizar compra';
+    }
   }
 
   function mostrarToast(msg) {
