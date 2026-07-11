@@ -2441,10 +2441,6 @@
   }
 
   // init auth
-  verificarSessao();
-
-  // carregar produtos ao iniciar
-  carregarProdutos();
   let lastMainPage = 'inicio';
 
   function goTo(pageId) {
@@ -2456,7 +2452,6 @@
       target.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    // track last main page (not profile sub-pages)
     const profilePages = ['entrar','pedidos','favoritos','configuracoes'];
     if (!profilePages.includes(pageId)) lastMainPage = pageId;
   }
@@ -2472,9 +2467,7 @@
     }
   }
 
-  function closeProfilePage() {
-    goTo(lastMainPage);
-  }
+  function closeProfilePage() { goTo(lastMainPage); }
 
   // logo click → home
   document.querySelector('.nav-logo').addEventListener('click', function(e) {
@@ -2504,14 +2497,13 @@
     if (!btn && !panel.contains(e.target)) panel.classList.remove('open');
   });
 
-  // Floating search — show after scrolling past nav
+  // Floating search
   const fabSearch = document.getElementById('fabSearch');
   window.addEventListener('scroll', function() {
     if (window.scrollY > 120) fabSearch.classList.add('visible');
     else fabSearch.classList.remove('visible');
   });
 
-  // Search modal
   function openSearch() {
     const modal = document.getElementById('searchModal');
     modal.classList.add('open');
@@ -2532,6 +2524,7 @@
     }
   });
 
+  // Auth tabs
   let abaAtual = 'login';
 
   function mostrarAba(aba) {
@@ -2573,6 +2566,10 @@
     if (abaAtual === 'login') fazerLogin(email, senha);
     else fazerCadastro(email, senha, nome);
   }
+
+  // ── INIT ──
+  verificarSessao();
+  carregarProdutos();
 </script>
 </body>
 </html>
