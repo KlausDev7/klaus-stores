@@ -1502,6 +1502,300 @@
     .checkout-field-row { grid-template-columns: 1fr; }
     .checkout-field-row.triple { grid-template-columns: 1fr; }
   }
+
+  /* ── PRODUTO INDIVIDUAL ── */
+  .product-page-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: calc(100vh - 64px);
+    padding-top: 64px;
+  }
+  .product-page-gallery {
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-page-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+  }
+  .product-page-gallery-placeholder {
+    font-size: 120px;
+    opacity: 0.2;
+  }
+  .product-page-info {
+    padding: 60px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .product-page-cat {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 12px;
+  }
+  .product-page-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .product-page-price {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+  .product-page-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.85rem;
+    color: var(--mid);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .product-page-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 10px;
+  }
+  /* tamanhos */
+  .size-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .size-btn {
+    min-width: 44px;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--light);
+    background: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    color: var(--text);
+    transition: all 0.15s;
+    text-transform: uppercase;
+  }
+  .size-btn:hover { border-color: var(--text); }
+  .size-btn.selected { background: var(--text); color: #fff; border-color: var(--text); }
+  .size-btn.esgotado { color: var(--light); border-color: #f0f0f0; cursor: not-allowed; text-decoration: line-through; }
+  /* cores */
+  .color-options {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .color-btn {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid var(--light);
+    background: none;
+    cursor: pointer;
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .color-btn:hover { border-color: var(--text); }
+  .color-btn.selected { background: var(--text); color: #fff; border-color: var(--text); }
+  /* frete */
+  .frete-box {
+    border: 1px solid var(--light);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .frete-input-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 12px;
+  }
+  .frete-input {
+    flex: 1;
+    border: 1px solid var(--light);
+    border-right: none;
+    padding: 11px 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    outline: none;
+    color: var(--text);
+  }
+  .frete-input:focus { border-color: var(--text); }
+  .frete-btn {
+    background: var(--text);
+    color: #fff;
+    border: none;
+    padding: 11px 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .frete-btn:hover { background: #333; }
+  .frete-resultado {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .frete-opcao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid var(--light);
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .frete-opcao:hover { border-color: var(--text); }
+  .frete-opcao.selected { border-color: var(--text); background: #fafafa; }
+  .frete-opcao-nome {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  .frete-opcao-prazo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.68rem;
+    color: var(--mid);
+    margin-top: 2px;
+  }
+  .frete-opcao-valor {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.82rem;
+    color: var(--text);
+  }
+  .product-page-add-btn {
+    width: 100%;
+    background: var(--text);
+    color: #fff;
+    border: none;
+    padding: 16px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .product-page-add-btn:hover { background: #333; }
+  .product-page-msg {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.75rem;
+    color: #c0392b;
+    margin-top: 8px;
+    min-height: 18px;
+  }
+  @media (max-width: 900px) {
+    .product-page-grid { grid-template-columns: 1fr; }
+    .product-page-gallery { min-height: 300px; }
+    .product-page-info { padding: 36px 24px; }
+  }
+
+  /* ── CONFIRMAÇÃO ── */
+  .confirm-page {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .confirm-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: #f0f9f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    color: #2ecc71;
+  }
+  .confirm-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .confirm-msg {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.88rem;
+    color: var(--mid);
+    line-height: 1.8;
+    max-width: 420px;
+    margin: 0 auto 36px;
+  }
+  .confirm-pedido-num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.15em;
+    color: var(--text);
+    background: #f5f5f5;
+    padding: 12px 28px;
+    margin-bottom: 36px;
+    display: inline-block;
+  }
+  .confirm-btn {
+    background: var(--text);
+    color: #fff;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .confirm-btn:hover { background: #333; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -1868,6 +2162,63 @@
 
 </div><!-- end #page-inicio -->
 
+<!-- ══ PRODUTO INDIVIDUAL ══ -->
+<div id="page-produto" class="page">
+  <div class="product-page-grid">
+    <div class="product-page-gallery" id="produto-gallery">
+      <div class="product-page-gallery-placeholder">🧥</div>
+    </div>
+    <div class="product-page-info">
+      <button class="page-back" onclick="goTo('inicio')" style="margin-bottom:24px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Voltar
+      </button>
+      <p class="product-page-cat" id="produto-cat">Categoria</p>
+      <h1 class="product-page-name" id="produto-nome">Nome do Produto</h1>
+      <p class="product-page-price" id="produto-preco">R$ 0,00</p>
+      <p class="product-page-desc" id="produto-desc">Descrição do produto.</p>
+
+      <!-- Cores -->
+      <div id="produto-cores-wrap">
+        <p class="product-page-label">Cor</p>
+        <div class="color-options" id="produto-cores"></div>
+      </div>
+
+      <!-- Tamanhos -->
+      <div id="produto-tamanhos-wrap">
+        <p class="product-page-label">Tamanho</p>
+        <div class="size-options" id="produto-tamanhos"></div>
+      </div>
+
+      <!-- Frete -->
+      <div class="frete-box">
+        <p class="product-page-label" style="margin-bottom:12px;">Calcular frete</p>
+        <div class="frete-input-row">
+          <input class="frete-input" id="frete-cep" type="text" placeholder="00000-000" maxlength="9" oninput="formatarCEPFrete(this)">
+          <button class="frete-btn" onclick="calcularFrete()">Calcular</button>
+        </div>
+        <div class="frete-resultado" id="frete-resultado"></div>
+      </div>
+
+      <p class="product-page-msg" id="produto-msg"></p>
+      <button class="product-page-add-btn" onclick="adicionarDaPagina()">Adicionar ao carrinho</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONFIRMAÇÃO ══ -->
+<div id="page-confirmacao" class="page">
+  <div class="confirm-page">
+    <div class="confirm-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <p class="confirm-title">Pedido confirmado</p>
+    <div class="confirm-pedido-num" id="confirm-num">Pedido #000000</div>
+    <p class="confirm-msg">Obrigado pela sua compra! Você receberá um e-mail com os detalhes do pedido e informações de rastreamento em breve.</p>
+    <button class="confirm-btn" onclick="goTo('inicio'); carrinho = []; atualizarBadgeCarrinho();">Continuar comprando</button>
+  </div>
+</div>
+
 <!-- ══ NOVIDADES ══ -->
 <div id="page-novidades" class="page">
   <div class="page-inner">
@@ -2124,6 +2475,10 @@
   });
 
   // ── PRODUTOS ──
+  let produtoAtual = null;
+  let tamanhoSelecionado = null;
+  let corSelecionada = null;
+
   async function carregarProdutos() {
     const grid = document.getElementById('products-grid');
     if (!grid) return;
@@ -2137,7 +2492,7 @@
         return;
       }
       grid.innerHTML = produtos.map(p => `
-        <div class="product-card">
+        <div class="product-card" onclick="abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})" style="cursor:pointer;">
           <div class="product-img">
             ${p.imagem_url ? `<img src="${p.imagem_url}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;">` : `<div class="product-img-bg" style="background:#ececec;font-size:60px;">🧥</div>`}
             ${p.tag ? `<div class="product-tag">${p.tag}</div>` : ''}
@@ -2145,12 +2500,158 @@
           <div class="product-info">
             <p class="product-name">${p.nome}</p>
             <p class="product-price">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</p>
-            <button class="product-add-btn" onclick="adicionarCarrinho(${JSON.stringify(p).replace(/"/g, '&quot;')})">Adicionar</button>
+            <button class="product-add-btn" onclick="event.stopPropagation(); abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})">Ver produto</button>
           </div>
         </div>`).join('');
     } catch (e) {
       grid.innerHTML = '<div class="products-loading">Erro ao carregar produtos</div>';
     }
+  }
+
+  function abrirProduto(p) {
+    produtoAtual = p;
+    tamanhoSelecionado = null;
+    corSelecionada = null;
+
+    document.getElementById('produto-cat').textContent = p.categoria || '';
+    document.getElementById('produto-nome').textContent = p.nome;
+    document.getElementById('produto-preco').textContent = 'R$ ' + Number(p.preco).toFixed(2).replace('.', ',');
+    document.getElementById('produto-desc').textContent = p.descricao || 'Peça exclusiva Klaus.';
+    document.getElementById('produto-msg').textContent = '';
+    document.getElementById('frete-resultado').innerHTML = '';
+    document.getElementById('frete-cep').value = '';
+
+    // gallery
+    const gallery = document.getElementById('produto-gallery');
+    if (p.imagem_url) {
+      gallery.innerHTML = `<img src="${p.imagem_url}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+    } else {
+      gallery.innerHTML = `<div class="product-page-gallery-placeholder">🧥</div>`;
+    }
+
+    // cores
+    const coresWrap = document.getElementById('produto-cores-wrap');
+    const coresEl = document.getElementById('produto-cores');
+    const cores = p.cores ? p.cores.split(',').map(c => c.trim()).filter(Boolean) : [];
+    if (cores.length) {
+      coresWrap.style.display = 'block';
+      coresEl.innerHTML = cores.map(c => `
+        <button class="size-btn" onclick="selecionarCor(this, '${c}')">${c}</button>
+      `).join('');
+    } else {
+      coresWrap.style.display = 'none';
+    }
+
+    // tamanhos
+    const tamWrap = document.getElementById('produto-tamanhos-wrap');
+    const tamEl = document.getElementById('produto-tamanhos');
+    const tamanhos = p.tamanhos ? p.tamanhos.split(',').map(t => t.trim()).filter(Boolean) : [];
+    if (tamanhos.length) {
+      tamWrap.style.display = 'block';
+      tamEl.innerHTML = tamanhos.map(t => `
+        <button class="size-btn" onclick="selecionarTamanho(this, '${t}')">${t}</button>
+      `).join('');
+    } else {
+      tamWrap.style.display = 'none';
+    }
+
+    goTo('produto');
+  }
+
+  function selecionarTamanho(btn, tam) {
+    document.querySelectorAll('#produto-tamanhos .size-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    tamanhoSelecionado = tam;
+  }
+
+  function selecionarCor(btn, cor) {
+    document.querySelectorAll('#produto-cores .size-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    corSelecionada = cor;
+  }
+
+  function adicionarDaPagina() {
+    if (!produtoAtual) return;
+    const tamanhos = produtoAtual.tamanhos ? produtoAtual.tamanhos.split(',').filter(Boolean) : [];
+    const cores = produtoAtual.cores ? produtoAtual.cores.split(',').filter(Boolean) : [];
+    const msg = document.getElementById('produto-msg');
+    if (tamanhos.length && !tamanhoSelecionado) { msg.textContent = 'Selecione um tamanho.'; return; }
+    if (cores.length && !corSelecionada) { msg.textContent = 'Selecione uma cor.'; return; }
+    msg.textContent = '';
+    const item = {
+      ...produtoAtual,
+      tamanho: tamanhoSelecionado,
+      cor: corSelecionada,
+      nome: produtoAtual.nome + (tamanhoSelecionado ? ` (${tamanhoSelecionado}` + (corSelecionada ? ` / ${corSelecionada}` : '') + ')' : '')
+    };
+    adicionarCarrinho(item);
+    openCart();
+  }
+
+  function formatarCEPFrete(el) {
+    let v = el.value.replace(/\D/g,'');
+    el.value = v.replace(/(\d{5})(\d)/,'$1-$2').substring(0,9);
+  }
+
+  async function calcularFrete() {
+    const cepEl = document.getElementById('frete-cep');
+    const resultado = document.getElementById('frete-resultado');
+    const cep = cepEl.value.replace(/\D/g,'');
+    if (cep.length !== 8) { resultado.innerHTML = '<p style="color:#c0392b;font-size:0.75rem;font-family:Inter,sans-serif;">CEP inválido.</p>'; return; }
+    resultado.innerHTML = '<p style="color:#888;font-size:0.75rem;font-family:Inter,sans-serif;letter-spacing:0.1em;">Calculando...</p>';
+    // Simulação de frete baseada no estado via ViaCEP
+    try {
+      const r = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const d = await r.json();
+      if (d.erro) { resultado.innerHTML = '<p style="color:#c0392b;font-size:0.75rem;font-family:Inter,sans-serif;">CEP não encontrado.</p>'; return; }
+      // Frete simulado por região
+      const estado = d.uf;
+      const spStates = ['SP'];
+      const sudeste = ['RJ','MG','ES'];
+      const sul = ['PR','SC','RS'];
+      let pac = { valor: 0, prazo: 0 };
+      let sedex = { valor: 0, prazo: 0 };
+      if (spStates.includes(estado)) {
+        pac = { valor: 12.90, prazo: 5 };
+        sedex = { valor: 24.90, prazo: 2 };
+      } else if (sudeste.includes(estado)) {
+        pac = { valor: 16.90, prazo: 7 };
+        sedex = { valor: 32.90, prazo: 3 };
+      } else if (sul.includes(estado)) {
+        pac = { valor: 18.90, prazo: 8 };
+        sedex = { valor: 36.90, prazo: 3 };
+      } else {
+        pac = { valor: 22.90, prazo: 12 };
+        sedex = { valor: 44.90, prazo: 5 };
+      }
+      resultado.innerHTML = `
+        <label class="frete-opcao" onclick="selecionarFrete(${pac.valor}, this)">
+          <input type="radio" name="frete" style="accent-color:#111;">
+          <div>
+            <div style="font-family:Inter,sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.05em;">PAC — Correios</div>
+            <div class="frete-opcao-prazo">Até ${pac.prazo} dias úteis</div>
+          </div>
+          <span class="frete-opcao-valor">R$ ${pac.valor.toFixed(2).replace('.',',')}</span>
+        </label>
+        <label class="frete-opcao" onclick="selecionarFrete(${sedex.valor}, this)">
+          <input type="radio" name="frete" style="accent-color:#111;">
+          <div>
+            <div style="font-family:Inter,sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.05em;">SEDEX — Correios</div>
+            <div class="frete-opcao-prazo">Até ${sedex.prazo} dias úteis</div>
+          </div>
+          <span class="frete-opcao-valor">R$ ${sedex.valor.toFixed(2).replace('.',',')}</span>
+        </label>`;
+    } catch(e) {
+      resultado.innerHTML = '<p style="color:#c0392b;font-size:0.75rem;font-family:Inter,sans-serif;">Erro ao calcular. Tente novamente.</p>';
+    }
+  }
+
+  let freteValor = 0;
+  function selecionarFrete(valor, label) {
+    freteValor = valor;
+    document.querySelectorAll('.frete-opcao').forEach(l => l.style.borderColor = 'var(--light)');
+    label.style.borderColor = 'var(--text)';
+    label.querySelector('input').checked = true;
   }
 
   // ── CARRINHO ──
@@ -2296,19 +2797,72 @@
     btn.disabled = true;
     btn.textContent = 'Processando...';
     try {
+      // Salvar pedido no Supabase
+      const pedidoNum = await salvarPedido();
+      // Processar pagamento
       const res = await fetch(`${SUPABASE_URL}/functions/v1/criar-preferencia`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUPABASE_KEY}` },
         body: JSON.stringify({ itens: carrinho, email: usuarioAtual.email })
       });
       const data = await res.json();
-      if (data.sandbox_url || data.url) { window.location.href = data.sandbox_url || data.url; }
-      else throw new Error('Erro ao gerar pagamento');
+      if (data.sandbox_url || data.url) {
+        // Mostrar confirmação antes de redirecionar
+        mostrarConfirmacao(pedidoNum);
+        setTimeout(() => { window.location.href = data.sandbox_url || data.url; }, 2500);
+      } else {
+        mostrarConfirmacao(pedidoNum);
+      }
     } catch(e) {
       msg.textContent = 'Erro ao processar. Tente novamente.';
       btn.disabled = false;
       btn.textContent = pagamentoAtual === 'pix' ? 'Gerar QR Code Pix' : 'Confirmar pedido';
     }
+  }
+
+  async function salvarPedido() {
+    const total = carrinho.reduce((s, i) => s + (Number(i.preco) * i.qty), 0);
+    const pedidoNum = 'KL' + Date.now().toString().slice(-6);
+    const entrega = {
+      nome: document.getElementById('co-nome')?.value + ' ' + document.getElementById('co-sobrenome')?.value,
+      cep: document.getElementById('co-cep')?.value,
+      rua: document.getElementById('co-rua')?.value,
+      numero: document.getElementById('co-numero')?.value,
+      bairro: document.getElementById('co-bairro')?.value,
+      cidade: document.getElementById('co-cidade')?.value,
+      estado: document.getElementById('co-estado')?.value,
+      telefone: document.getElementById('co-telefone')?.value,
+    };
+    try {
+      await fetch(`${SUPABASE_URL}/rest/v1/pedidos`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          numero: pedidoNum,
+          usuario_id: usuarioAtual.id,
+          email: usuarioAtual.email,
+          itens: JSON.stringify(carrinho),
+          total: total,
+          frete: freteValor,
+          entrega: JSON.stringify(entrega),
+          pagamento: pagamentoAtual,
+          status: 'aguardando_pagamento'
+        })
+      });
+    } catch(e) { /* continua mesmo se falhar */ }
+    return pedidoNum;
+  }
+
+  function mostrarConfirmacao(pedidoNum) {
+    document.getElementById('confirm-num').textContent = 'Pedido #' + pedidoNum;
+    goTo('confirmacao');
+    carrinho = [];
+    atualizarBadgeCarrinho();
   }
   function formatarCartao(el) { let v = el.value.replace(/\D/g,'').substring(0,16); el.value = v.replace(/(.{4})/g,'$1 ').trim(); }
   function formatarValidade(el) { let v = el.value.replace(/\D/g,'').substring(0,4); if (v.length >= 2) v = v.substring(0,2)+'/'+v.substring(2); el.value = v; }
