@@ -2051,9 +2051,15 @@
 
         <!-- Pix -->
         <div id="pay-pix" style="display:none;">
-          <div class="pix-block">
-            <div class="pix-qr" id="pix-qr-area">QR Code</div>
-            <p>Após confirmar o pedido, o QR Code Pix será gerado aqui.<br>Você tem <strong>30 minutos</strong> para realizar o pagamento.</p>
+          <div class="pix-block" style="text-align:center;padding:32px 20px;border:1px solid var(--light);">
+            <div id="pix-qr-area" style="display:none;"></div>
+            <p id="pix-pre-msg" style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.85rem;color:var(--mid);line-height:1.8;">
+              Clique em <strong style="color:var(--text);">Gerar QR Code Pix</strong> para finalizar.<br>
+              O código expira em <strong style="color:var(--text);">30 minutos</strong> após a geração.
+            </p>
+            <div id="pix-desconto-badge" style="margin-top:16px;display:inline-block;background:#f0faf0;border:1px solid #c3e6cb;padding:8px 18px;border-radius:4px;">
+              <span style="font-family:'Inter',sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.1em;color:#2d6a4f;">🎉 10% de desconto no Pix</span>
+            </div>
           </div>
         </div>
 
@@ -2075,6 +2081,10 @@
       <div class="checkout-total-row">
         <span class="checkout-total-label">Frete</span>
         <span class="checkout-total-value" id="co-frete">A calcular</span>
+      </div>
+      <div class="checkout-total-row" id="co-desconto-row" style="display:none;">
+        <span class="checkout-total-label" style="color:#2d6a4f;">Desconto Pix (10%)</span>
+        <span class="checkout-total-value" id="co-desconto" style="color:#2d6a4f;">— </span>
       </div>
       <div class="checkout-divider"></div>
       <div class="checkout-total-row checkout-grand-total">
@@ -2202,6 +2212,47 @@
 
       <p class="product-page-msg" id="produto-msg"></p>
       <button class="product-page-add-btn" onclick="adicionarDaPagina()">Adicionar ao carrinho</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PIX PAGE ══ -->
+<div id="page-pix" class="page">
+  <div style="display:grid;grid-template-columns:1fr 380px;min-height:calc(100vh - 64px);">
+    <!-- LEFT -->
+    <div style="padding:60px 60px 60px 80px;border-right:1px solid var(--light);">
+      <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;" id="pix-pedido-num">Pedido #000000</p>
+      <h2 style="font-family:'Libre Baskerville',serif;font-weight:700;font-size:1.8rem;margin-bottom:32px;">Pague com Pix</h2>
+
+      <div style="border:1px solid var(--light);padding:32px;text-align:center;margin-bottom:28px;">
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.78rem;letter-spacing:0.1em;color:var(--mid);margin-bottom:16px;">O código Pix expira em:</p>
+        <div style="display:inline-flex;align-items:center;gap:8px;border:1px solid var(--light);border-radius:999px;padding:8px 20px;margin-bottom:20px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="pix-timer" style="font-family:'Inter',sans-serif;font-weight:400;font-size:0.88rem;">30min e 00s</span>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;color:var(--mid);letter-spacing:0.08em;margin-bottom:24px;">Leia o QR Code com o app do seu banco</p>
+        <img id="pix-qr-img" src="" alt="QR Code Pix" style="width:200px;height:200px;margin:0 auto;display:block;border:1px solid var(--light);padding:8px;">
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;color:var(--mid);margin-top:20px;letter-spacing:0.05em;">Total da compra: <strong id="pix-total-val" style="font-weight:500;color:var(--text);">R$ 0,00</strong></p>
+      </div>
+
+      <div style="background:#f0faf0;border:1px solid #c3e6cb;padding:14px 20px;border-radius:4px;margin-bottom:28px;text-align:center;">
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.78rem;color:#2d6a4f;letter-spacing:0.05em;">✓ Desconto de 10% aplicado no pagamento via Pix</p>
+      </div>
+
+      <div style="border:1px solid var(--light);padding:20px 24px;margin-bottom:16px;">
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Endereço de entrega</p>
+        <p id="pix-entrega-info" style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;line-height:1.8;color:var(--text);"></p>
+      </div>
+
+      <button onclick="mostrarConfirmacao(document.getElementById('pix-pedido-num').textContent.replace('Pedido #',''))" style="width:100%;background:none;border:1px solid var(--light);padding:14px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;color:var(--mid);transition:all 0.2s;border-radius:4px;" onmouseover="this.style.borderColor='var(--text)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--light)';this.style.color='var(--mid)'">
+        Já realizei o pagamento
+      </button>
+    </div>
+
+    <!-- RIGHT -->
+    <div style="padding:60px 40px;background:#fafafa;">
+      <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--light);">Itens do carrinho</p>
+      <div id="pix-itens-list"></div>
     </div>
   </div>
 </div>
@@ -2652,6 +2703,26 @@
     document.querySelectorAll('.frete-opcao').forEach(l => l.style.borderColor = 'var(--light)');
     label.style.borderColor = 'var(--text)';
     label.querySelector('input').checked = true;
+    atualizarTotalCheckout();
+  }
+
+  function atualizarTotalCheckout() {
+    const subtotal = carrinho.reduce((s, i) => s + (Number(i.preco) * i.qty), 0);
+    const freteEl = document.getElementById('co-frete');
+    const totalEl = document.getElementById('co-total');
+    const descontoRow = document.getElementById('co-desconto-row');
+    const descontoEl = document.getElementById('co-desconto');
+    if (freteEl && freteValor > 0) freteEl.textContent = 'R$ ' + freteValor.toFixed(2).replace('.', ',');
+    let total = subtotal + freteValor;
+    if (pagamentoAtual === 'pix') {
+      const desconto = subtotal * 0.10;
+      total = (subtotal - desconto) + freteValor;
+      if (descontoRow) descontoRow.style.display = 'flex';
+      if (descontoEl) descontoEl.textContent = '− R$ ' + desconto.toFixed(2).replace('.', ',');
+    } else {
+      if (descontoRow) descontoRow.style.display = 'none';
+    }
+    if (totalEl) totalEl.textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
   }
 
   // ── CARRINHO ──
@@ -2769,9 +2840,11 @@
     const campos = ['co-nome','co-cep','co-rua','co-numero','co-cidade','co-estado'];
     const vazio = campos.find(id => !document.getElementById(id)?.value.trim());
     if (vazio) { document.getElementById('msg-entrega').textContent = 'Preencha todos os campos obrigatórios.'; return; }
+    if (freteValor === 0) { document.getElementById('msg-entrega').textContent = 'Calcule e selecione uma opção de frete.'; return; }
     document.getElementById('msg-entrega').textContent = '';
     document.getElementById('step-entrega').style.display = 'none';
     document.getElementById('step-pagamento').style.display = 'block';
+    atualizarTotalCheckout();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   function trocarPagamento(tipo) {
@@ -2781,6 +2854,7 @@
     document.getElementById('tab-cartao').classList.toggle('active', tipo === 'cartao');
     document.getElementById('tab-pix').classList.toggle('active', tipo === 'pix');
     document.getElementById('btn-confirmar').textContent = tipo === 'pix' ? 'Gerar QR Code Pix' : 'Confirmar pedido';
+    atualizarTotalCheckout();
   }
   async function confirmarPedido() {
     const btn = document.getElementById('btn-confirmar');
@@ -2797,27 +2871,87 @@
     btn.disabled = true;
     btn.textContent = 'Processando...';
     try {
-      // Salvar pedido no Supabase
       const pedidoNum = await salvarPedido();
-      // Processar pagamento
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/criar-preferencia`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUPABASE_KEY}` },
-        body: JSON.stringify({ itens: carrinho, email: usuarioAtual.email })
-      });
-      const data = await res.json();
-      if (data.sandbox_url || data.url) {
-        // Mostrar confirmação antes de redirecionar
-        mostrarConfirmacao(pedidoNum);
-        setTimeout(() => { window.location.href = data.sandbox_url || data.url; }, 2500);
+      if (pagamentoAtual === 'pix') {
+        // Para Pix: mostrar tela de QR code estilizada
+        mostrarPagamentoPix(pedidoNum);
       } else {
-        mostrarConfirmacao(pedidoNum);
+        // Para cartão: redirecionar para MP
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/criar-preferencia`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${SUPABASE_KEY}` },
+          body: JSON.stringify({ itens: carrinho, email: usuarioAtual.email })
+        });
+        const data = await res.json();
+        if (data.sandbox_url || data.url) {
+          mostrarConfirmacao(pedidoNum);
+          setTimeout(() => { window.location.href = data.sandbox_url || data.url; }, 2000);
+        } else {
+          mostrarConfirmacao(pedidoNum);
+        }
       }
     } catch(e) {
       msg.textContent = 'Erro ao processar. Tente novamente.';
       btn.disabled = false;
       btn.textContent = pagamentoAtual === 'pix' ? 'Gerar QR Code Pix' : 'Confirmar pedido';
     }
+  }
+
+  let pixTimer = null;
+  function mostrarPagamentoPix(pedidoNum) {
+    const subtotal = carrinho.reduce((s, i) => s + (Number(i.preco) * i.qty), 0);
+    const desconto = subtotal * 0.10;
+    const total = (subtotal - desconto) + freteValor;
+    const entrega = {
+      nome: (document.getElementById('co-nome')?.value || '') + ' ' + (document.getElementById('co-sobrenome')?.value || ''),
+      rua: document.getElementById('co-rua')?.value || '',
+      numero: document.getElementById('co-numero')?.value || '',
+      bairro: document.getElementById('co-bairro')?.value || '',
+      cidade: document.getElementById('co-cidade')?.value || '',
+      estado: document.getElementById('co-estado')?.value || '',
+      cep: document.getElementById('co-cep')?.value || '',
+    };
+
+    // Montar tela Pix
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-pix').classList.add('active');
+    document.getElementById('pix-pedido-num').textContent = 'Pedido #' + pedidoNum;
+    document.getElementById('pix-total-val').textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+    document.getElementById('pix-entrega-info').innerHTML = `
+      ${entrega.nome}<br>
+      ${entrega.rua}, ${entrega.numero}<br>
+      ${entrega.bairro} — ${entrega.cidade} / ${entrega.estado}<br>
+      CEP ${entrega.cep}`;
+    document.getElementById('pix-itens-list').innerHTML = carrinho.map(i => `
+      <div style="display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--light);">
+        <div style="width:48px;height:60px;background:#ececec;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;overflow:hidden;">
+          ${i.imagem_url ? `<img src="${i.imagem_url}" style="width:100%;height:100%;object-fit:cover;">` : '🧥'}
+        </div>
+        <div style="flex:1;">
+          <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;">${i.nome}</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:0.78rem;margin-top:3px;">R$ ${(Number(i.preco)*i.qty).toFixed(2).replace('.',',')}</p>
+        </div>
+      </div>`).join('');
+
+    // QR code via API pública
+    const pixKey = '00020126580014BR.GOV.BCB.PIX0136' + pedidoNum + '5204000053039865406' + total.toFixed(2).replace('.','') + '5802BR5913Klaus Store6008Sao Paulo62070503***6304';
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent('Klaus Pix - Pedido #' + pedidoNum + ' - R$ ' + total.toFixed(2))}`;
+    document.getElementById('pix-qr-img').src = qrUrl;
+
+    // Timer 30 min
+    let segundos = 30 * 60;
+    if (pixTimer) clearInterval(pixTimer);
+    const timerEl = document.getElementById('pix-timer');
+    pixTimer = setInterval(() => {
+      segundos--;
+      const m = Math.floor(segundos / 60);
+      const s = segundos % 60;
+      if (timerEl) timerEl.textContent = `${m}min e ${s.toString().padStart(2,'0')}s`;
+      if (segundos <= 0) { clearInterval(pixTimer); if (timerEl) timerEl.textContent = 'Expirado'; }
+    }, 1000);
+
+    carrinho = [];
+    atualizarBadgeCarrinho();
   }
 
   async function salvarPedido() {
@@ -2859,6 +2993,7 @@
   }
 
   function mostrarConfirmacao(pedidoNum) {
+    if (pixTimer) clearInterval(pixTimer);
     document.getElementById('confirm-num').textContent = 'Pedido #' + pedidoNum;
     goTo('confirmacao');
     carrinho = [];
