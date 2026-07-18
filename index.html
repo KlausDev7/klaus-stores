@@ -147,6 +147,109 @@
     line-height: 1;
   }
 
+  /* ── CATEGORY NAV (desktop) ── */
+  .cat-nav {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    z-index: 190;
+    justify-content: center;
+    gap: 36px;
+    background: rgba(255,255,255,0.98);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--light);
+    padding: 0 28px;
+    height: 42px;
+  }
+  @media (min-width: 901px) {
+    .cat-nav { display: flex; }
+    .hero, .page { padding-top: 106px; }
+    .product-page-grid { padding-top: 106px; min-height: calc(100vh - 106px); }
+    .profile-panel { top: 106px; }
+  }
+
+  .cat-item { position: relative; display: flex; align-items: center; }
+
+  .cat-item > a {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 0.86rem;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--text);
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s, color 0.15s;
+    cursor: pointer;
+  }
+  .cat-item:hover > a,
+  .cat-item > a.active { border-color: var(--text); }
+
+  .mega-menu {
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid var(--light);
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    padding: 22px 28px;
+    display: none;
+    gap: 40px;
+    min-width: 420px;
+    z-index: 250;
+  }
+  .cat-item:hover .mega-menu { display: flex; }
+
+  .mega-col h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.86rem;
+    color: var(--text);
+    margin-bottom: 10px;
+    white-space: nowrap;
+  }
+  .mega-col a {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.82rem;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--mid);
+    text-decoration: none;
+    padding: 5px 0;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  .mega-col a:hover { color: var(--text); }
+
+  .filtro-ativo-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 28px 0;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    color: var(--mid);
+  }
+  .filtro-ativo-bar.show { display: flex; }
+  .filtro-ativo-bar button {
+    background: none;
+    border: 1px solid var(--light);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text);
+    cursor: pointer;
+  }
+
   /* ── DRAWER MENU ── */
   .drawer-overlay {
     position: fixed;
@@ -278,10 +381,10 @@
 
   .profile-info p {
     font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 0.72rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: normal;
+    text-transform: none;
     color: var(--text);
   }
 
@@ -302,13 +405,14 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 11px 20px;
+    padding: 12px 20px;
     color: var(--text);
     text-decoration: none;
     font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 0.83rem;
-    letter-spacing: 0.02em;
+    font-weight: 400;
+    font-size: 0.9rem;
+    letter-spacing: normal;
+    text-transform: none;
     transition: background 0.15s;
     cursor: pointer;
   }
@@ -1880,17 +1984,21 @@
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       Entrar / Cadastrar
     </a></li>
-    <li><a href="#" onclick="goToProfile('pedidos')">
+    <li id="menu-conta" style="display:none"><a href="#" onclick="goToProfile('minha-conta')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Minha Conta
+    </a></li>
+    <li id="menu-pedidos-link" style="display:none"><a href="#" onclick="goToProfile('pedidos')">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       Meus Pedidos
     </a></li>
-    <li><a href="#" onclick="goToProfile('favoritos')">
+    <li id="menu-favoritos-link" style="display:none"><a href="#" onclick="goToProfile('favoritos')">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      Favoritos
+      Meus Favoritos
     </a></li>
-    <li><a href="#" onclick="goToProfile('configuracoes')">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
-      Configurações
+    <li id="menu-vistos-link" style="display:none"><a href="#" onclick="goToProfile('vistos')">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      Vistos Recentemente
     </a></li>
     <li id="menu-sair" style="display:none"><a href="#" onclick="fazerLogout()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
@@ -1926,6 +2034,64 @@
     </button>
   </div>
 </nav>
+
+<!-- CATEGORY NAV (desktop) -->
+<div class="cat-nav">
+  <div class="cat-item">
+    <a href="#" onclick="filtrarProdutos('tag','Promo');return false;">Promo</a>
+  </div>
+  <div class="cat-item">
+    <a href="#" onclick="filtrarProdutos('tag','Lançamento');return false;">Lançamentos</a>
+  </div>
+  <div class="cat-item">
+    <a href="#" onclick="filtrarProdutos('genero','Masculino');return false;">Masculino</a>
+    <div class="mega-menu">
+      <div class="mega-col">
+        <h4>Destaques</h4>
+        <a href="#" onclick="filtrarProdutos('tag','Lançamento');return false;">Lançamentos</a>
+        <a href="#" onclick="filtrarProdutos('tag','Mais vendido');return false;">Mais vendidos</a>
+        <a href="#" onclick="filtrarProdutos('tag','Edição limitada');return false;">Edição limitada</a>
+        <a href="#" onclick="filtrarProdutos('tag','Promo');return false;">Promoções</a>
+      </div>
+      <div class="mega-col">
+        <h4>Feminino</h4>
+        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Calçados');return false;">Calçados</a>
+        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Roupas');return false;">Roupas</a>
+        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Acessórios');return false;">Acessórios</a>
+      </div>
+      <div class="mega-col">
+        <h4>Masculino</h4>
+        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Calçados');return false;">Calçados</a>
+        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Roupas');return false;">Roupas</a>
+        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Acessórios');return false;">Acessórios</a>
+      </div>
+    </div>
+  </div>
+  <div class="cat-item">
+    <a href="#" onclick="filtrarProdutos('genero','Feminino');return false;">Feminino</a>
+    <div class="mega-menu">
+      <div class="mega-col">
+        <h4>Destaques</h4>
+        <a href="#" onclick="filtrarProdutos('tag','Lançamento');return false;">Lançamentos</a>
+        <a href="#" onclick="filtrarProdutos('tag','Mais vendido');return false;">Mais vendidos</a>
+        <a href="#" onclick="filtrarProdutos('tag','Edição limitada');return false;">Edição limitada</a>
+        <a href="#" onclick="filtrarProdutos('tag','Promo');return false;">Promoções</a>
+      </div>
+      <div class="mega-col">
+        <h4>Feminino</h4>
+        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Calçados');return false;">Calçados</a>
+        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Roupas');return false;">Roupas</a>
+        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Acessórios');return false;">Acessórios</a>
+      </div>
+      <div class="mega-col">
+        <h4>Masculino</h4>
+        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Calçados');return false;">Calçados</a>
+        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Roupas');return false;">Roupas</a>
+        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Acessórios');return false;">Acessórios</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ CHECKOUT PAGE ══ -->
 <div id="page-checkout" class="page">
@@ -2110,9 +2276,14 @@
 
 
 
+<div class="filtro-ativo-bar" id="filtroAtivoBar">
+  <span id="filtroAtivoTexto"></span>
+  <button onclick="limparFiltro()">Limpar filtro ✕</button>
+</div>
+
 <section class="products-section">
   <div class="section-header">
-    <div class="section-title">DESTAQUES</div>
+    <div class="section-title" id="products-section-title">DESTAQUES</div>
   </div>
   <div class="products-grid" id="products-grid">
     <div class="products-loading">Carregando produtos...</div>
@@ -2393,17 +2564,57 @@
   </div>
 </div>
 
-<!-- ══ PERFIL: PEDIDOS ══ -->
-<div id="page-pedidos" class="page">
-  <div class="page-inner">
+<!-- ══ MINHA CONTA ══ -->
+<div id="page-minha-conta" class="page">
+  <div class="page-inner" style="max-width:900px;">
     <button class="page-back" onclick="closeProfilePage()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
       Voltar
     </button>
+    <div class="page-title">Minha Conta</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+      <div style="background:#f8f8f8;padding:28px;border-radius:4px;">
+        <h3 style="font-family:'Inter',sans-serif;font-weight:500;font-size:1rem;margin-bottom:20px;">Meus Pedidos</h3>
+        <a href="#" onclick="goToProfile('pedidos')" style="display:block;padding:14px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Últimos pedidos</a>
+      </div>
+      <div style="background:#f8f8f8;padding:28px;border-radius:4px;">
+        <h3 style="font-family:'Inter',sans-serif;font-weight:500;font-size:1rem;margin-bottom:20px;">Meu Cadastro</h3>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <a href="#" onclick="goToProfile('dados-pessoais')" style="display:block;padding:11px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Alterar dados pessoais</a>
+          <a href="#" onclick="goToProfile('alterar-email')" style="display:block;padding:11px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Alterar meu e-mail</a>
+          <a href="#" onclick="goToProfile('alterar-senha')" style="display:block;padding:11px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Trocar minha senha</a>
+          <a href="#" style="display:block;padding:11px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Meus cartões</a>
+          <a href="#" style="display:block;padding:11px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Preferências de comunicação</a>
+        </div>
+      </div>
+      <div style="background:#f8f8f8;padding:28px;border-radius:4px;">
+        <h3 style="font-family:'Inter',sans-serif;font-weight:500;font-size:1rem;margin-bottom:20px;">Vale-troca</h3>
+        <a href="#" style="display:block;padding:14px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Extrato de uso</a>
+      </div>
+      <div style="background:#f8f8f8;padding:28px;border-radius:4px;">
+        <h3 style="font-family:'Inter',sans-serif;font-weight:500;font-size:1rem;margin-bottom:20px;">Serviços</h3>
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <a href="#" style="display:block;padding:11px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Portal de Autoatendimento</a>
+          <a href="#" onclick="goToProfile('favoritos')" style="display:block;padding:11px 16px;background:#fff;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;color:var(--text);text-decoration:none;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">Favoritos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERFIL: PEDIDOS ══ -->
+<div id="page-pedidos" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="goToProfile('minha-conta')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Minha Conta
+    </button>
     <div class="page-title">Meus Pedidos</div>
-    <div class="page-empty">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-      <p>Nenhum pedido encontrado</p>
+    <div id="lista-pedidos">
+      <div class="page-empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <p>Nenhum pedido encontrado</p>
+      </div>
     </div>
   </div>
 </div>
@@ -2411,14 +2622,64 @@
 <!-- ══ PERFIL: FAVORITOS ══ -->
 <div id="page-favoritos" class="page">
   <div class="page-inner">
-    <button class="page-back" onclick="closeProfilePage()">
+    <button class="page-back" onclick="goToProfile('minha-conta')">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-      Voltar
+      Minha Conta
     </button>
     <div class="page-title">Favoritos</div>
     <div class="page-empty">
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       <p>Nenhum favorito salvo</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERFIL: VISTOS RECENTEMENTE ══ -->
+<div id="page-vistos" class="page">
+  <div class="page-inner">
+    <button class="page-back" onclick="closeProfilePage()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Voltar
+    </button>
+    <div class="page-title">Vistos Recentemente</div>
+    <div id="lista-vistos" class="page-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+      <p>Nenhum produto visualizado ainda</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERFIL: DADOS PESSOAIS ══ -->
+<div id="page-dados-pessoais" class="page">
+  <div class="page-inner" style="max-width:560px;">
+    <button class="page-back" onclick="goToProfile('minha-conta')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Minha Conta
+    </button>
+    <div class="page-title">Alterar Dados Pessoais</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="checkout-field"><label>Nome completo</label><input type="text" id="dp-nome" placeholder="Seu nome completo"></div>
+      <div class="checkout-field"><label>Telefone</label><input type="text" id="dp-tel" placeholder="(00) 00000-0000"></div>
+      <div class="checkout-field"><label>CPF</label><input type="text" id="dp-cpf" placeholder="000.000.000-00" maxlength="14" oninput="formatarCPF(this)"></div>
+      <p id="msg-dp" style="font-family:'Inter',sans-serif;font-size:0.78rem;color:#2d6a4f;min-height:18px;"></p>
+      <button onclick="salvarDadosPessoais()" style="background:var(--text);color:#fff;border:none;padding:14px;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;">Salvar alterações</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERFIL: ALTERAR SENHA ══ -->
+<div id="page-alterar-senha" class="page">
+  <div class="page-inner" style="max-width:560px;">
+    <button class="page-back" onclick="goToProfile('minha-conta')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Minha Conta
+    </button>
+    <div class="page-title">Trocar Senha</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="checkout-field"><label>Nova senha</label><input type="password" id="nova-senha" placeholder="••••••••"></div>
+      <div class="checkout-field"><label>Confirmar nova senha</label><input type="password" id="conf-senha" placeholder="••••••••"></div>
+      <p id="msg-senha" style="font-family:'Inter',sans-serif;font-size:0.78rem;color:#c0392b;min-height:18px;"></p>
+      <button onclick="alterarSenha()" style="background:var(--text);color:#fff;border:none;padding:14px;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;">Alterar senha</button>
     </div>
   </div>
 </div>
@@ -2498,6 +2759,12 @@
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const target = document.getElementById('page-' + subPage);
     if (target) { target.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    if (subPage === 'pedidos') carregarPedidos();
+    if (subPage === 'dados-pessoais' && usuarioAtual) {
+      const nome = usuarioAtual.user_metadata?.nome || '';
+      const el = document.getElementById('dp-nome');
+      if (el) el.value = nome;
+    }
   }
   function closeProfilePage() { goTo(lastMainPage); }
 
@@ -2529,34 +2796,66 @@
   let produtoAtual = null;
   let tamanhoSelecionado = null;
   let corSelecionada = null;
+  let todosProdutos = [];
 
   async function carregarProdutos() {
     const grid = document.getElementById('products-grid');
     if (!grid) return;
+    grid.innerHTML = '<div class="products-loading">Carregando produtos...</div>';
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/produtos?select=*&order=nome.asc`, {
         headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
       });
       const produtos = await res.json();
-      if (!Array.isArray(produtos) || !produtos.length) {
-        grid.innerHTML = '<div class="products-loading">Nenhum produto cadastrado ainda</div>';
-        return;
-      }
-      grid.innerHTML = produtos.map(p => `
-        <div class="product-card" onclick="abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})" style="cursor:pointer;">
-          <div class="product-img">
-            ${p.imagem_url ? `<img src="${p.imagem_url}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;">` : `<div class="product-img-bg" style="background:#ececec;font-size:60px;">🧥</div>`}
-            ${p.tag ? `<div class="product-tag">${p.tag}</div>` : ''}
-          </div>
-          <div class="product-info">
-            <p class="product-name">${p.nome}</p>
-            <p class="product-price">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</p>
-            <button class="product-add-btn" onclick="event.stopPropagation(); abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})">Ver produto</button>
-          </div>
-        </div>`).join('');
+      todosProdutos = Array.isArray(produtos) ? produtos : [];
+      renderizarProdutos(todosProdutos);
     } catch (e) {
       grid.innerHTML = '<div class="products-loading">Erro ao carregar produtos</div>';
     }
+  }
+
+  function renderizarProdutos(lista) {
+    const grid = document.getElementById('products-grid');
+    if (!grid) return;
+    if (!lista.length) {
+      grid.innerHTML = '<div class="products-loading">Nenhum produto encontrado</div>';
+      return;
+    }
+    grid.innerHTML = lista.map(p => `
+      <div class="product-card" onclick="abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})" style="cursor:pointer;">
+        <div class="product-img">
+          ${p.imagem_url ? `<img src="${p.imagem_url}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;">` : `<div class="product-img-bg" style="background:#ececec;font-size:60px;">🧥</div>`}
+          ${p.tag ? `<div class="product-tag">${p.tag}</div>` : ''}
+        </div>
+        <div class="product-info">
+          <p class="product-name">${p.nome}</p>
+          <p class="product-price">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</p>
+          <button class="product-add-btn" onclick="event.stopPropagation(); abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})">Ver produto</button>
+        </div>
+      </div>`).join('');
+  }
+
+  // filtrarProdutos('genero','Masculino') ou filtrarProdutos('genero','Masculino','categoria','Calçados') ou filtrarProdutos('tag','Promo')
+  function filtrarProdutos(campo1, valor1, campo2, valor2) {
+    goTo('inicio');
+    let filtrados = todosProdutos.filter(p => (p[campo1] || '').toLowerCase() === valor1.toLowerCase());
+    if (campo2 && valor2) {
+      filtrados = filtrados.filter(p => (p[campo2] || '').toLowerCase() === valor2.toLowerCase());
+    }
+    renderizarProdutos(filtrados);
+    const bar = document.getElementById('filtroAtivoBar');
+    const texto = document.getElementById('filtroAtivoTexto');
+    let label = valor1 + (valor2 ? ' · ' + valor2 : '');
+    texto.textContent = `Filtro ativo: ${label} (${filtrados.length})`;
+    bar.classList.add('show');
+    document.getElementById('products-section-title').textContent = label.toUpperCase();
+    document.getElementById('products-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function limparFiltro() {
+    renderizarProdutos(todosProdutos);
+    document.getElementById('filtroAtivoBar').classList.remove('show');
+    document.getElementById('products-section-title').textContent = 'DESTAQUES';
   }
 
   function abrirProduto(p) {
@@ -3036,20 +3335,24 @@
     const sub = document.querySelector('.profile-info small');
     if (info) info.textContent = nome;
     if (sub) sub.textContent = user.email;
-    const me = document.getElementById('menu-entrar');
-    const ms = document.getElementById('menu-sair');
-    if (me) me.style.display = 'none';
-    if (ms) ms.style.display = 'flex';
+    document.getElementById('menu-entrar').style.display = 'none';
+    document.getElementById('menu-conta').style.display = 'flex';
+    document.getElementById('menu-pedidos-link').style.display = 'flex';
+    document.getElementById('menu-favoritos-link').style.display = 'flex';
+    document.getElementById('menu-vistos-link').style.display = 'flex';
+    document.getElementById('menu-sair').style.display = 'flex';
   }
   function atualizarUIDeslogado() {
     const info = document.querySelector('.profile-info p');
     const sub = document.querySelector('.profile-info small');
     if (info) info.textContent = 'Minha Conta';
     if (sub) sub.textContent = 'Entre ou cadastre-se';
-    const me = document.getElementById('menu-entrar');
-    const ms = document.getElementById('menu-sair');
-    if (me) me.style.display = 'flex';
-    if (ms) ms.style.display = 'none';
+    document.getElementById('menu-entrar').style.display = 'flex';
+    document.getElementById('menu-conta').style.display = 'none';
+    document.getElementById('menu-pedidos-link').style.display = 'none';
+    document.getElementById('menu-favoritos-link').style.display = 'none';
+    document.getElementById('menu-vistos-link').style.display = 'none';
+    document.getElementById('menu-sair').style.display = 'none';
     usuarioAtual = null;
   }
   async function verificarSessao() {
@@ -3111,6 +3414,66 @@
     if (abaAtual === 'cadastro' && !nome) { document.getElementById('auth-msg').textContent = 'Preencha seu nome.'; return; }
     if (abaAtual === 'login') fazerLogin(email, senha);
     else fazerCadastro(email, senha, nome);
+  }
+
+  // ── CONTA: DADOS PESSOAIS ──
+  async function salvarDadosPessoais() {
+    const nome = document.getElementById('dp-nome').value.trim();
+    const msg = document.getElementById('msg-dp');
+    if (!nome) { msg.style.color = '#c0392b'; msg.textContent = 'Preencha seu nome.'; return; }
+    const { error } = await sb.auth.updateUser({ data: { nome } });
+    if (error) { msg.style.color = '#c0392b'; msg.textContent = 'Erro ao salvar.'; return; }
+    msg.style.color = '#2d6a4f';
+    msg.textContent = 'Dados salvos com sucesso!';
+    const info = document.querySelector('.profile-info p');
+    if (info) info.textContent = nome;
+    setTimeout(() => msg.textContent = '', 3000);
+  }
+
+  // ── CONTA: ALTERAR SENHA ──
+  async function alterarSenha() {
+    const nova = document.getElementById('nova-senha').value;
+    const conf = document.getElementById('conf-senha').value;
+    const msg = document.getElementById('msg-senha');
+    if (!nova || nova.length < 6) { msg.textContent = 'A senha deve ter pelo menos 6 caracteres.'; return; }
+    if (nova !== conf) { msg.textContent = 'As senhas não coincidem.'; return; }
+    const { error } = await sb.auth.updateUser({ password: nova });
+    if (error) { msg.textContent = 'Erro ao alterar senha.'; return; }
+    msg.style.color = '#2d6a4f';
+    msg.textContent = 'Senha alterada com sucesso!';
+    document.getElementById('nova-senha').value = '';
+    document.getElementById('conf-senha').value = '';
+    setTimeout(() => { msg.textContent = ''; msg.style.color = '#c0392b'; }, 3000);
+  }
+
+  // ── CONTA: CARREGAR PEDIDOS ──
+  async function carregarPedidos() {
+    if (!usuarioAtual) return;
+    const lista = document.getElementById('lista-pedidos');
+    if (!lista) return;
+    try {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/pedidos?email=eq.${usuarioAtual.email}&order=criado_em.desc`, {
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+      });
+      const pedidos = await res.json();
+      if (!pedidos.length) {
+        lista.innerHTML = `<div class="page-empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><p>Nenhum pedido encontrado</p></div>`;
+        return;
+      }
+      lista.innerHTML = pedidos.map(p => `
+        <div style="border:1px solid var(--light);padding:20px 24px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+          <div>
+            <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;">#${p.numero}</p>
+            <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.75rem;color:var(--mid);margin-top:4px;">${new Date(p.criado_em).toLocaleDateString('pt-BR')}</p>
+          </div>
+          <div style="text-align:right;">
+            <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:0.88rem;">R$ ${Number(p.total).toFixed(2).replace('.',',')}</p>
+            <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;color:var(--mid);margin-top:4px;text-transform:uppercase;letter-spacing:0.1em;">${p.status.replace(/_/g,' ')}</p>
+          </div>
+        </div>`).join('');
+    } catch(e) {
+      lista.innerHTML = '<p style="color:#c0392b;font-family:Inter,sans-serif;font-size:0.82rem;">Erro ao carregar pedidos.</p>';
+    }
   }
 
   // ── INIT ──
