@@ -147,109 +147,6 @@
     line-height: 1;
   }
 
-  /* ── CATEGORY NAV (desktop) ── */
-  .cat-nav {
-    display: none;
-    position: fixed;
-    top: 64px; left: 0; right: 0;
-    z-index: 190;
-    justify-content: center;
-    gap: 36px;
-    background: rgba(255,255,255,0.98);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--light);
-    padding: 0 28px;
-    height: 42px;
-  }
-  @media (min-width: 901px) {
-    .cat-nav { display: flex; }
-    .hero, .page { padding-top: 106px; }
-    .product-page-grid { padding-top: 106px; min-height: calc(100vh - 106px); }
-    .profile-panel { top: 106px; }
-  }
-
-  .cat-item { position: relative; display: flex; align-items: center; }
-
-  .cat-item > a {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 0.86rem;
-    letter-spacing: normal;
-    text-transform: none;
-    color: var(--text);
-    text-decoration: none;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s, color 0.15s;
-    cursor: pointer;
-  }
-  .cat-item:hover > a,
-  .cat-item > a.active { border-color: var(--text); }
-
-  .mega-menu {
-    position: absolute;
-    top: 100%; left: 50%;
-    transform: translateX(-50%);
-    background: #fff;
-    border: 1px solid var(--light);
-    border-radius: 8px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
-    padding: 22px 28px;
-    display: none;
-    gap: 40px;
-    min-width: 420px;
-    z-index: 250;
-  }
-  .cat-item:hover .mega-menu { display: flex; }
-
-  .mega-col h4 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 0.86rem;
-    color: var(--text);
-    margin-bottom: 10px;
-    white-space: nowrap;
-  }
-  .mega-col a {
-    display: block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 0.82rem;
-    letter-spacing: normal;
-    text-transform: none;
-    color: var(--mid);
-    text-decoration: none;
-    padding: 5px 0;
-    white-space: nowrap;
-    transition: color 0.15s;
-  }
-  .mega-col a:hover { color: var(--text); }
-
-  .filtro-ativo-bar {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 18px 28px 0;
-    display: none;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.82rem;
-    color: var(--mid);
-  }
-  .filtro-ativo-bar.show { display: flex; }
-  .filtro-ativo-bar button {
-    background: none;
-    border: 1px solid var(--light);
-    border-radius: 999px;
-    padding: 4px 12px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.78rem;
-    color: var(--text);
-    cursor: pointer;
-  }
-
   /* ── DRAWER MENU ── */
   .drawer-overlay {
     position: fixed;
@@ -381,10 +278,10 @@
 
   .profile-info p {
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 0.9rem;
-    letter-spacing: normal;
-    text-transform: none;
+    font-weight: 300;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
     color: var(--text);
   }
 
@@ -405,14 +302,13 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 20px;
+    padding: 11px 20px;
     color: var(--text);
     text-decoration: none;
     font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 0.9rem;
-    letter-spacing: normal;
-    text-transform: none;
+    font-weight: 300;
+    font-size: 0.83rem;
+    letter-spacing: 0.02em;
     transition: background 0.15s;
     cursor: pointer;
   }
@@ -825,6 +721,115 @@
     footer { grid-template-columns: 1fr 1fr; padding: 40px 24px; gap: 40px; }
     .footer-bottom { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
   }
+  /* ── SECONDARY NAV ── */
+  .secondary-nav {
+    position: fixed;
+    top: 64px;
+    left: 0; right: 0;
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--light);
+    padding: 0;
+    height: 42px;
+    align-items: center;
+  }
+
+  .secondary-nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .secondary-nav-item > span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 0 4px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .secondary-nav-item:hover > span {
+    border-bottom-color: var(--text);
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    border: 1px solid var(--light);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s, transform 0.18s;
+    transform: translateX(-50%) translateY(-6px);
+    z-index: 200;
+    min-width: 180px;
+    padding: 16px 20px;
+    border-radius: 12px;
+  }
+
+  .dropdown.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .dropdown-col-title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .dropdown-col a {
+    display: block;
+    padding: 5px 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .dropdown-col a:hover { color: var(--text); }
+
+  /* push content down to account for secondary nav */
+  .hero { padding-top: 106px; }
+  #page-checkout, #page-produto, #page-confirmacao,
+  #page-pix, #page-minha-conta, #page-pedidos,
+  #page-favoritos, #page-vistos, #page-dados-pessoais,
+  #page-alterar-senha, #page-configuracoes, #page-entrar,
+  #page-novidades, #page-colecoes, #page-drops, #page-sale,
+  #page-sobre, #page-contato { padding-top: 106px; }
+
+  @media (max-width: 700px) {
+    .secondary-nav { gap: 32px; }
+  }
+
   /* ── PAGES ── */
   .page {
     display: none;
@@ -1927,44 +1932,21 @@
 <!-- DRAWER MENU -->
 <div class="drawer" id="drawer">
   <div class="drawer-header">
-    <span>Menu</span>
+    <span></span>
     <button class="drawer-close" onclick="closeDrawer()">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
   <ul class="drawer-nav">
-    <li><a href="#" onclick="goTo('inicio')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      Início
-    </a></li>
+    <li><a href="#" onclick="goTo('inicio')">Início</a></li>
     <li><div class="divider"></div></li>
-    <li><span class="sub">Loja</span></li>
-    <li><a href="#" onclick="goTo('novidades')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      Novidades
-    </a></li>
-    <li><a href="#" onclick="goTo('colecoes')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      Coleções
-    </a></li>
-    <li><a href="#" onclick="goTo('drops')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Drops
-    </a></li>
-    <li><a href="#" onclick="goTo('sale')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-      Sale
-    </a></li>
+    <li><a href="#" onclick="goTo('novidades')">Novidades</a></li>
+    <li><a href="#" onclick="goTo('colecoes')">Coleções</a></li>
+    <li><a href="#" onclick="goTo('drops')">Drops</a></li>
+    <li><a href="#" onclick="goTo('sale')">Sale</a></li>
     <li><div class="divider"></div></li>
-    <li><span class="sub">Informações</span></li>
-    <li><a href="#" onclick="goTo('sobre')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Sobre a Klaus
-    </a></li>
-    <li><a href="#" onclick="goTo('contato')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Contato
-    </a></li>
+    <li><a href="#" onclick="goTo('sobre')">Sobre a Klaus</a></li>
+    <li><a href="#" onclick="goTo('contato')">Contato</a></li>
   </ul>
 </div>
 
@@ -2035,65 +2017,31 @@
   </div>
 </nav>
 
-<!-- CATEGORY NAV (desktop) -->
-<div class="cat-nav">
-  <div class="cat-item">
-    <a href="#" onclick="filtrarProdutos('tag','Promo');return false;">Promo</a>
-  </div>
-  <div class="cat-item">
-    <a href="#" onclick="filtrarProdutos('tag','Lançamento');return false;">Lançamentos</a>
-  </div>
-  <div class="cat-item">
-    <a href="#" onclick="filtrarProdutos('genero','Masculino');return false;">Masculino</a>
-    <div class="mega-menu">
-      <div class="mega-col">
-        <h4>Destaques</h4>
-        <a href="#" onclick="filtrarProdutos('tag','Lançamento');return false;">Lançamentos</a>
-        <a href="#" onclick="filtrarProdutos('tag','Mais vendido');return false;">Mais vendidos</a>
-        <a href="#" onclick="filtrarProdutos('tag','Edição limitada');return false;">Edição limitada</a>
-        <a href="#" onclick="filtrarProdutos('tag','Promo');return false;">Promoções</a>
-      </div>
-      <div class="mega-col">
-        <h4>Feminino</h4>
-        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Calçados');return false;">Calçados</a>
-        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Roupas');return false;">Roupas</a>
-        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Acessórios');return false;">Acessórios</a>
-      </div>
-      <div class="mega-col">
-        <h4>Masculino</h4>
-        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Calçados');return false;">Calçados</a>
-        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Roupas');return false;">Roupas</a>
-        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Acessórios');return false;">Acessórios</a>
+<!-- SECONDARY NAV -->
+<div class="secondary-nav" id="secondaryNav">
+  <div class="secondary-nav-item" onmouseenter="openDropdown('masculino')" onmouseleave="closeDropdown('masculino')">
+    <span>Masculino</span>
+    <div class="dropdown" id="dropdown-masculino">
+      <div class="dropdown-col">
+        <a href="#" onclick="goTo('novidades')">Lançamentos</a>
+        <a href="#" onclick="goTo('novidades')">Mais vendidos</a>
+        <a href="#" onclick="goTo('colecoes')">Roupas</a>
+        <a href="#" onclick="goTo('colecoes')">Acessórios</a>
       </div>
     </div>
   </div>
-  <div class="cat-item">
-    <a href="#" onclick="filtrarProdutos('genero','Feminino');return false;">Feminino</a>
-    <div class="mega-menu">
-      <div class="mega-col">
-        <h4>Destaques</h4>
-        <a href="#" onclick="filtrarProdutos('tag','Lançamento');return false;">Lançamentos</a>
-        <a href="#" onclick="filtrarProdutos('tag','Mais vendido');return false;">Mais vendidos</a>
-        <a href="#" onclick="filtrarProdutos('tag','Edição limitada');return false;">Edição limitada</a>
-        <a href="#" onclick="filtrarProdutos('tag','Promo');return false;">Promoções</a>
-      </div>
-      <div class="mega-col">
-        <h4>Feminino</h4>
-        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Calçados');return false;">Calçados</a>
-        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Roupas');return false;">Roupas</a>
-        <a href="#" onclick="filtrarProdutos('genero','Feminino','categoria','Acessórios');return false;">Acessórios</a>
-      </div>
-      <div class="mega-col">
-        <h4>Masculino</h4>
-        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Calçados');return false;">Calçados</a>
-        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Roupas');return false;">Roupas</a>
-        <a href="#" onclick="filtrarProdutos('genero','Masculino','categoria','Acessórios');return false;">Acessórios</a>
+  <div class="secondary-nav-item" onmouseenter="openDropdown('feminino')" onmouseleave="closeDropdown('feminino')">
+    <span>Feminino</span>
+    <div class="dropdown" id="dropdown-feminino">
+      <div class="dropdown-col">
+        <a href="#" onclick="goTo('novidades')">Lançamentos</a>
+        <a href="#" onclick="goTo('novidades')">Mais vendidos</a>
+        <a href="#" onclick="goTo('colecoes')">Roupas</a>
+        <a href="#" onclick="goTo('colecoes')">Acessórios</a>
       </div>
     </div>
   </div>
 </div>
-
-<!-- ══ CHECKOUT PAGE ══ -->
 <div id="page-checkout" class="page">
   <div class="checkout-grid">
     <!-- LEFT: form -->
@@ -2276,14 +2224,9 @@
 
 
 
-<div class="filtro-ativo-bar" id="filtroAtivoBar">
-  <span id="filtroAtivoTexto"></span>
-  <button onclick="limparFiltro()">Limpar filtro ✕</button>
-</div>
-
 <section class="products-section">
   <div class="section-header">
-    <div class="section-title" id="products-section-title">DESTAQUES</div>
+    <div class="section-title">DESTAQUES</div>
   </div>
   <div class="products-grid" id="products-grid">
     <div class="products-loading">Carregando produtos...</div>
@@ -2796,66 +2739,34 @@
   let produtoAtual = null;
   let tamanhoSelecionado = null;
   let corSelecionada = null;
-  let todosProdutos = [];
 
   async function carregarProdutos() {
     const grid = document.getElementById('products-grid');
     if (!grid) return;
-    grid.innerHTML = '<div class="products-loading">Carregando produtos...</div>';
     try {
       const res = await fetch(`${SUPABASE_URL}/rest/v1/produtos?select=*&order=nome.asc`, {
         headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
       });
       const produtos = await res.json();
-      todosProdutos = Array.isArray(produtos) ? produtos : [];
-      renderizarProdutos(todosProdutos);
+      if (!Array.isArray(produtos) || !produtos.length) {
+        grid.innerHTML = '<div class="products-loading">Nenhum produto cadastrado ainda</div>';
+        return;
+      }
+      grid.innerHTML = produtos.map(p => `
+        <div class="product-card" onclick="abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})" style="cursor:pointer;">
+          <div class="product-img">
+            ${p.imagem_url ? `<img src="${p.imagem_url}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;">` : `<div class="product-img-bg" style="background:#ececec;font-size:60px;">🧥</div>`}
+            ${p.tag ? `<div class="product-tag">${p.tag}</div>` : ''}
+          </div>
+          <div class="product-info">
+            <p class="product-name">${p.nome}</p>
+            <p class="product-price">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</p>
+            <button class="product-add-btn" onclick="event.stopPropagation(); abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})">Ver produto</button>
+          </div>
+        </div>`).join('');
     } catch (e) {
       grid.innerHTML = '<div class="products-loading">Erro ao carregar produtos</div>';
     }
-  }
-
-  function renderizarProdutos(lista) {
-    const grid = document.getElementById('products-grid');
-    if (!grid) return;
-    if (!lista.length) {
-      grid.innerHTML = '<div class="products-loading">Nenhum produto encontrado</div>';
-      return;
-    }
-    grid.innerHTML = lista.map(p => `
-      <div class="product-card" onclick="abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})" style="cursor:pointer;">
-        <div class="product-img">
-          ${p.imagem_url ? `<img src="${p.imagem_url}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;">` : `<div class="product-img-bg" style="background:#ececec;font-size:60px;">🧥</div>`}
-          ${p.tag ? `<div class="product-tag">${p.tag}</div>` : ''}
-        </div>
-        <div class="product-info">
-          <p class="product-name">${p.nome}</p>
-          <p class="product-price">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</p>
-          <button class="product-add-btn" onclick="event.stopPropagation(); abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})">Ver produto</button>
-        </div>
-      </div>`).join('');
-  }
-
-  // filtrarProdutos('genero','Masculino') ou filtrarProdutos('genero','Masculino','categoria','Calçados') ou filtrarProdutos('tag','Promo')
-  function filtrarProdutos(campo1, valor1, campo2, valor2) {
-    goTo('inicio');
-    let filtrados = todosProdutos.filter(p => (p[campo1] || '').toLowerCase() === valor1.toLowerCase());
-    if (campo2 && valor2) {
-      filtrados = filtrados.filter(p => (p[campo2] || '').toLowerCase() === valor2.toLowerCase());
-    }
-    renderizarProdutos(filtrados);
-    const bar = document.getElementById('filtroAtivoBar');
-    const texto = document.getElementById('filtroAtivoTexto');
-    let label = valor1 + (valor2 ? ' · ' + valor2 : '');
-    texto.textContent = `Filtro ativo: ${label} (${filtrados.length})`;
-    bar.classList.add('show');
-    document.getElementById('products-section-title').textContent = label.toUpperCase();
-    document.getElementById('products-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  function limparFiltro() {
-    renderizarProdutos(todosProdutos);
-    document.getElementById('filtroAtivoBar').classList.remove('show');
-    document.getElementById('products-section-title').textContent = 'DESTAQUES';
   }
 
   function abrirProduto(p) {
@@ -3474,6 +3385,14 @@
     } catch(e) {
       lista.innerHTML = '<p style="color:#c0392b;font-family:Inter,sans-serif;font-size:0.82rem;">Erro ao carregar pedidos.</p>';
     }
+  }
+
+  // ── DROPDOWN NAV ──
+  function openDropdown(id) {
+    document.getElementById('dropdown-' + id).classList.add('open');
+  }
+  function closeDropdown(id) {
+    document.getElementById('dropdown-' + id).classList.remove('open');
   }
 
   // ── INIT ──
