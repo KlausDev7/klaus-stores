@@ -347,6 +347,11 @@
     background-position: center;
   }
 
+  video.hero-visual-bg {
+    object-fit: cover;
+    display: block;
+  }
+
   .hero-placeholder-label {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
@@ -2215,9 +2220,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-visual hero-visual--full">
-    <div class="hero-visual-bg">
-      <span class="hero-placeholder-label">Sua imagem aqui</span>
-    </div>
+    <video class="hero-visual-bg" src="Video_1.mp4" autoplay muted loop playsinline></video>
   </div>
 </section>
 
