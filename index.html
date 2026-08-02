@@ -21,7 +21,7 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Libre Baskerville', Georgia, serif;
+    font-family: 'Inter', sans-serif;
     overflow-x: hidden;
   }
 
@@ -87,7 +87,7 @@
     border: none;
     background: transparent;
     outline: none;
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.82rem;
     color: var(--text);
     width: 100%;
@@ -96,15 +96,21 @@
 
   /* center logo */
   .nav-logo {
-    font-family: 'Libre Baskerville', Georgia, serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    letter-spacing: 0.22em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text);
     text-decoration: none;
-    text-transform: uppercase;
     text-align: center;
     justify-self: center;
+  }
+  .nav-logo img {
+    height: 26px;
+    width: auto;
+    display: block;
+  }
+  .footer-brand .nav-logo img {
+    height: 30px;
   }
 
   /* right cluster */
@@ -138,7 +144,7 @@
     background: var(--text);
     color: #fff;
     border-radius: 50%;
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.6rem;
     font-weight: 700;
     display: flex;
@@ -183,11 +189,10 @@
   }
 
   .drawer-header span {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 900;
     font-size: 0.72rem;
     letter-spacing: 0.3em;
-    text-transform: uppercase;
     color: var(--mid);
   }
 
@@ -231,11 +236,10 @@
   }
 
   .drawer-nav li .sub {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.78rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     color: var(--mid);
     padding: 10px 24px 4px;
     display: block;
@@ -281,7 +285,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.28em;
-    text-transform: uppercase;
     color: var(--text);
   }
 
@@ -357,7 +360,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.32em;
-    text-transform: uppercase;
     color: rgba(255,255,255,0.5);
   }
 
@@ -426,7 +428,7 @@
   .search-modal input {
     border: none;
     outline: none;
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
     color: var(--text);
     flex: 1;
@@ -453,11 +455,10 @@
   }
 
   .section-title {
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 0.82rem;
     letter-spacing: 0.38em;
-    text-transform: uppercase;
     color: var(--text);
   }
 
@@ -466,11 +467,10 @@
     margin-top: 40px;
   }
   .section-nav-link a {
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 0.78rem;
     letter-spacing: 0.3em;
-    text-transform: uppercase;
     color: var(--mid);
     text-decoration: none;
     border-bottom: 1px solid var(--light);
@@ -509,28 +509,26 @@
     top: 10px; left: 10px;
     background: var(--text);
     color: var(--bg);
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 900;
     font-size: 0.65rem;
     letter-spacing: 0.12em;
     padding: 4px 9px;
-    text-transform: uppercase;
   }
 
   .product-info { padding: 0 1px; }
 
   .product-name {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.82rem;
     letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--text);
     margin-bottom: 3px;
   }
 
   .product-price {
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 0.82rem;
     color: var(--mid);
@@ -544,11 +542,10 @@
     color: var(--text);
     border: 1px solid var(--light);
     padding: 9px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.75rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     cursor: pointer;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
   }
@@ -591,14 +588,12 @@
     font-weight: 300;
     font-size: 1.1rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     color: #f5f5f5;
     transition: color 0.2s;
   }
   .cat-label p {
     font-size: 0.68rem;
     color: #777;
-    text-transform: uppercase;
     letter-spacing: 0.18em;
     margin-top: 4px;
     font-family: 'Inter', sans-serif;
@@ -616,7 +611,7 @@
     gap: 60px;
   }
   .newsletter-text h2 {
-    font-family: 'Libre Baskerville', serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 2.4rem;
     line-height: 1.1;
@@ -637,7 +632,7 @@
     border-right: none;
     color: #f5f5f5;
     padding: 15px 22px;
-    font-family: 'Barlow', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 0.86rem;
     width: 280px;
     outline: none;
@@ -650,11 +645,10 @@
     color: var(--dark-bg);
     border: none;
     padding: 15px 28px;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 900;
     font-size: 0.82rem;
     letter-spacing: 0.15em;
-    text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
     transition: background 0.2s;
@@ -679,11 +673,10 @@
     font-style: italic;
   }
   .footer-col h4 {
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 0.72rem;
     letter-spacing: 0.28em;
-    text-transform: uppercase;
     color: var(--mid);
     margin-bottom: 14px;
   }
@@ -708,7 +701,7 @@
     color: var(--mid);
     font-size: 0.75rem;
     letter-spacing: 0.05em;
-    font-family: 'Barlow Condensed', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   @media (max-width: 900px) {
@@ -756,7 +749,6 @@
     font-weight: 300;
     font-size: 0.78rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     color: var(--text);
     padding: 0 4px;
     height: 100%;
@@ -857,7 +849,6 @@
     font-weight: 300;
     font-size: 0.75rem;
     letter-spacing: 0.22em;
-    text-transform: uppercase;
     color: var(--mid);
     text-decoration: none;
     margin-bottom: 48px;
@@ -874,7 +865,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.38em;
-    text-transform: uppercase;
     color: var(--text);
     margin-bottom: 60px;
     padding-bottom: 20px;
@@ -898,7 +888,6 @@
     font-weight: 300;
     font-size: 0.8rem;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
     color: var(--mid);
   }
 
@@ -942,7 +931,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.35em;
-    text-transform: uppercase;
     color: var(--text);
   }
 
@@ -991,7 +979,6 @@
     font-weight: 300;
     font-size: 0.8rem;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--text);
     margin-bottom: 5px;
   }
@@ -1070,7 +1057,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.22em;
-    text-transform: uppercase;
     color: var(--mid);
   }
 
@@ -1092,7 +1078,6 @@
     font-weight: 400;
     font-size: 0.75rem;
     letter-spacing: 0.28em;
-    text-transform: uppercase;
     cursor: pointer;
     transition: background 0.2s;
   }
@@ -1118,7 +1103,6 @@
     font-weight: 300;
     font-size: 0.75rem;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
     color: var(--mid);
   }
 
@@ -1132,7 +1116,6 @@
     font-weight: 300;
     font-size: 0.78rem;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
     color: var(--mid);
     padding: 60px 0;
   }
@@ -1153,7 +1136,6 @@
     font-weight: 300;
     font-size: 0.68rem;
     letter-spacing: 0.32em;
-    text-transform: uppercase;
     color: var(--text);
     margin-bottom: 24px;
     padding-bottom: 14px;
@@ -1165,7 +1147,6 @@
     font-weight: 300;
     font-size: 0.68rem;
     letter-spacing: 0.22em;
-    text-transform: uppercase;
     color: var(--mid);
     display: block;
     margin-bottom: 7px;
@@ -1205,7 +1186,6 @@
     font-weight: 400;
     font-size: 0.75rem;
     letter-spacing: 0.28em;
-    text-transform: uppercase;
     cursor: pointer;
     transition: background 0.2s;
     margin-top: 4px;
@@ -1229,7 +1209,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     cursor: pointer;
     color: var(--mid);
     transition: background 0.2s, color 0.2s;
@@ -1271,7 +1250,6 @@
     font-weight: 300;
     font-size: 0.68rem;
     letter-spacing: 0.32em;
-    text-transform: uppercase;
     color: var(--mid);
     margin-bottom: 18px;
   }
@@ -1298,7 +1276,6 @@
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 0.75rem;
-    text-transform: uppercase;
     letter-spacing: 0.08em;
     flex: 1;
   }
@@ -1322,7 +1299,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--mid);
   }
   .order-total-row span:last-child {
@@ -1361,7 +1337,6 @@
     font-weight: 300;
     font-size: 0.68rem;
     letter-spacing: 0.35em;
-    text-transform: uppercase;
     color: var(--mid);
     margin-bottom: 32px;
   }
@@ -1371,7 +1346,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.3em;
-    text-transform: uppercase;
     color: var(--text);
     margin-bottom: 24px;
     padding-bottom: 14px;
@@ -1399,7 +1373,6 @@
     font-weight: 300;
     font-size: 0.68rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     color: var(--mid);
   }
 
@@ -1440,7 +1413,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     color: var(--mid);
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
@@ -1478,7 +1450,6 @@
     color: var(--mid);
     font-family: 'Inter', sans-serif;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
   }
 
   /* checkout summary */
@@ -1526,7 +1497,6 @@
     font-weight: 300;
     font-size: 0.78rem;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
     color: var(--text);
     margin-bottom: 3px;
   }
@@ -1556,7 +1526,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     color: var(--mid);
   }
 
@@ -1581,7 +1550,6 @@
     font-weight: 400;
     font-size: 0.75rem;
     letter-spacing: 0.28em;
-    text-transform: uppercase;
     cursor: pointer;
     margin-top: 28px;
     transition: background 0.2s;
@@ -1597,7 +1565,6 @@
     font-size: 0.68rem;
     letter-spacing: 0.12em;
     color: var(--mid);
-    text-transform: uppercase;
   }
 
   .checkout-msg {
@@ -1656,7 +1623,6 @@
     font-weight: 300;
     font-size: 0.68rem;
     letter-spacing: 0.32em;
-    text-transform: uppercase;
     color: var(--mid);
     margin-bottom: 12px;
   }
@@ -1665,7 +1631,6 @@
     font-weight: 300;
     font-size: 1.6rem;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
     color: var(--text);
     margin-bottom: 8px;
     line-height: 1.2;
@@ -1690,7 +1655,6 @@
     font-weight: 300;
     font-size: 0.68rem;
     letter-spacing: 0.28em;
-    text-transform: uppercase;
     color: var(--mid);
     margin-bottom: 10px;
   }
@@ -1714,7 +1678,6 @@
     cursor: pointer;
     color: var(--text);
     transition: all 0.15s;
-    text-transform: uppercase;
   }
   .size-btn:hover { border-color: var(--text); }
   .size-btn.selected { background: var(--text); color: #fff; border-color: var(--text); }
@@ -1731,7 +1694,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
     padding: 8px 16px;
     border: 1px solid var(--light);
     background: none;
@@ -1773,7 +1735,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.18em;
-    text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
     transition: background 0.2s;
@@ -1826,7 +1787,6 @@
     font-weight: 400;
     font-size: 0.75rem;
     letter-spacing: 0.28em;
-    text-transform: uppercase;
     cursor: pointer;
     transition: background 0.2s;
     margin-top: 8px;
@@ -1871,7 +1831,6 @@
     font-weight: 300;
     font-size: 0.72rem;
     letter-spacing: 0.38em;
-    text-transform: uppercase;
     color: var(--text);
     margin-bottom: 14px;
   }
@@ -1905,7 +1864,6 @@
     font-weight: 400;
     font-size: 0.75rem;
     letter-spacing: 0.25em;
-    text-transform: uppercase;
     cursor: pointer;
     transition: background 0.2s;
   }
@@ -2008,7 +1966,7 @@
   </div>
 
   <!-- center logo -->
-  <a class="nav-logo" href="#">Klaus</a>
+  <a class="nav-logo" href="#"><img src="logo.png" alt="Klaus"></a>
 
   <!-- right -->
   <div class="nav-right">
@@ -2266,7 +2224,7 @@
 
 <footer>
   <div class="footer-brand">
-    <a class="nav-logo" href="#" style="text-decoration:none;">Klaus</a>
+    <a class="nav-logo" href="#" style="text-decoration:none;justify-content:flex-start;"><img src="logo.png" alt="Klaus"></a>
     <p>Streetwear para quem define as regras. Desde 2019, nas ruas de São Paulo.</p>
   </div>
   <div class="footer-col">
@@ -2338,8 +2296,8 @@
   <div style="display:grid;grid-template-columns:1fr 380px;min-height:calc(100vh - 64px);">
     <!-- LEFT -->
     <div style="padding:60px 60px 60px 80px;border-right:1px solid var(--light);">
-      <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--mid);margin-bottom:8px;" id="pix-pedido-num">Pedido #000000</p>
-      <h2 style="font-family:'Libre Baskerville',serif;font-weight:700;font-size:1.8rem;margin-bottom:32px;">Pague com Pix</h2>
+      <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.3em;color:var(--mid);margin-bottom:8px;" id="pix-pedido-num">Pedido #000000</p>
+      <h2 style="font-family: 'Inter', sans-serif;font-weight:700;font-size:1.8rem;margin-bottom:32px;">Pague com Pix</h2>
 
       <div style="border:1px solid var(--light);padding:32px;text-align:center;margin-bottom:28px;">
         <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.78rem;letter-spacing:0.1em;color:var(--mid);margin-bottom:16px;">O código Pix expira em:</p>
@@ -2357,18 +2315,18 @@
       </div>
 
       <div style="border:1px solid var(--light);padding:20px 24px;margin-bottom:16px;">
-        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--mid);margin-bottom:10px;">Endereço de entrega</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.25em;color:var(--mid);margin-bottom:10px;">Endereço de entrega</p>
         <p id="pix-entrega-info" style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.82rem;line-height:1.8;color:var(--text);"></p>
       </div>
 
-      <button onclick="mostrarConfirmacao(document.getElementById('pix-pedido-num').textContent.replace('Pedido #',''))" style="width:100%;background:none;border:1px solid var(--light);padding:14px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;color:var(--mid);transition:all 0.2s;border-radius:4px;" onmouseover="this.style.borderColor='var(--text)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--light)';this.style.color='var(--mid)'">
+      <button onclick="mostrarConfirmacao(document.getElementById('pix-pedido-num').textContent.replace('Pedido #',''))" style="width:100%;background:none;border:1px solid var(--light);padding:14px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.25em;cursor:pointer;color:var(--mid);transition:all 0.2s;border-radius:4px;" onmouseover="this.style.borderColor='var(--text)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--light)';this.style.color='var(--mid)'">
         Já realizei o pagamento
       </button>
     </div>
 
     <!-- RIGHT -->
     <div style="padding:60px 40px;background:#fafafa;">
-      <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--mid);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--light);">Itens do carrinho</p>
+      <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.68rem;letter-spacing:0.3em;color:var(--mid);margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--light);">Itens do carrinho</p>
       <div id="pix-itens-list"></div>
     </div>
   </div>
@@ -2487,25 +2445,25 @@
     <div class="page-title" id="auth-title">Entrar</div>
 
     <div style="display:flex;gap:0;margin-bottom:40px;border-bottom:1px solid var(--light);">
-      <button id="tab-login" onclick="mostrarAba('login')" style="flex:1;background:none;border:none;padding:12px;font-family:'Inter',sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;border-bottom:1px solid var(--text);color:var(--text);margin-bottom:-1px;">Entrar</button>
-      <button id="tab-cadastro" onclick="mostrarAba('cadastro')" style="flex:1;background:none;border:none;padding:12px;font-family:'Inter',sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;color:var(--mid);">Cadastrar</button>
+      <button id="tab-login" onclick="mostrarAba('login')" style="flex:1;background:none;border:none;padding:12px;font-family:'Inter',sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.2em;cursor:pointer;border-bottom:1px solid var(--text);color:var(--text);margin-bottom:-1px;">Entrar</button>
+      <button id="tab-cadastro" onclick="mostrarAba('cadastro')" style="flex:1;background:none;border:none;padding:12px;font-family:'Inter',sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.2em;cursor:pointer;color:var(--mid);">Cadastrar</button>
     </div>
 
     <div style="display:flex;flex-direction:column;gap:16px;">
       <div id="campo-nome" style="display:none;">
-        <label style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:8px;">Nome</label>
+        <label style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.2em;color:var(--mid);display:block;margin-bottom:8px;">Nome</label>
         <input id="auth-nome" type="text" placeholder="Seu nome" style="width:100%;padding:14px 16px;border:1px solid var(--light);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;color:var(--text);transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--text)'" onblur="this.style.borderColor='var(--light)'">
       </div>
       <div>
-        <label style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:8px;">E-mail</label>
+        <label style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.2em;color:var(--mid);display:block;margin-bottom:8px;">E-mail</label>
         <input id="auth-email" type="email" placeholder="seu@email.com" style="width:100%;padding:14px 16px;border:1px solid var(--light);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;color:var(--text);transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--text)'" onblur="this.style.borderColor='var(--light)'">
       </div>
       <div>
-        <label style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:8px;">Senha</label>
+        <label style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:0.2em;color:var(--mid);display:block;margin-bottom:8px;">Senha</label>
         <input id="auth-senha" type="password" placeholder="••••••••" style="width:100%;padding:14px 16px;border:1px solid var(--light);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;color:var(--text);transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--text)'" onblur="this.style.borderColor='var(--light)'">
       </div>
       <p id="auth-msg" style="font-family:'Inter',sans-serif;font-size:0.78rem;color:#c0392b;min-height:18px;letter-spacing:0.05em;"></p>
-      <button id="auth-btn" onclick="submitAuth()" style="width:100%;background:var(--text);color:#fff;border:none;padding:15px;font-family:'Inter',sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--text)'">Entrar</button>
+      <button id="auth-btn" onclick="submitAuth()" style="width:100%;background:var(--text);color:#fff;border:none;padding:15px;font-family:'Inter',sans-serif;font-weight:400;font-size:0.78rem;letter-spacing:0.25em;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='var(--text)'">Entrar</button>
     </div>
   </div>
 </div>
@@ -2608,7 +2566,7 @@
       <div class="checkout-field"><label>Telefone</label><input type="text" id="dp-tel" placeholder="(00) 00000-0000"></div>
       <div class="checkout-field"><label>CPF</label><input type="text" id="dp-cpf" placeholder="000.000.000-00" maxlength="14" oninput="formatarCPF(this)"></div>
       <p id="msg-dp" style="font-family:'Inter',sans-serif;font-size:0.78rem;color:#2d6a4f;min-height:18px;"></p>
-      <button onclick="salvarDadosPessoais()" style="background:var(--text);color:#fff;border:none;padding:14px;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;">Salvar alterações</button>
+      <button onclick="salvarDadosPessoais()" style="background:var(--text);color:#fff;border:none;padding:14px;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.75rem;letter-spacing:0.25em;cursor:pointer;">Salvar alterações</button>
     </div>
   </div>
 </div>
@@ -2625,7 +2583,7 @@
       <div class="checkout-field"><label>Nova senha</label><input type="password" id="nova-senha" placeholder="••••••••"></div>
       <div class="checkout-field"><label>Confirmar nova senha</label><input type="password" id="conf-senha" placeholder="••••••••"></div>
       <p id="msg-senha" style="font-family:'Inter',sans-serif;font-size:0.78rem;color:#c0392b;min-height:18px;"></p>
-      <button onclick="alterarSenha()" style="background:var(--text);color:#fff;border:none;padding:14px;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;">Alterar senha</button>
+      <button onclick="alterarSenha()" style="background:var(--text);color:#fff;border:none;padding:14px;border-radius:4px;font-family:'Inter',sans-serif;font-weight:300;font-size:0.75rem;letter-spacing:0.25em;cursor:pointer;">Alterar senha</button>
     </div>
   </div>
 </div>
@@ -2706,6 +2664,7 @@
     const target = document.getElementById('page-' + subPage);
     if (target) { target.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
     if (subPage === 'pedidos') carregarPedidos();
+    if (subPage === 'vistos') renderizarVistosRecentemente();
     if (subPage === 'dados-pessoais' && usuarioAtual) {
       const nome = usuarioAtual.user_metadata?.nome || '';
       const el = document.getElementById('dp-nome');
@@ -2819,7 +2778,48 @@
       tamWrap.style.display = 'none';
     }
 
+    salvarVistoRecentemente(p);
     goTo('produto');
+  }
+
+  // ── VISTOS RECENTEMENTE ──
+  function salvarVistoRecentemente(p) {
+    if (!p || (p.id === undefined && p.id !== 0)) return;
+    let vistos = [];
+    try { vistos = JSON.parse(localStorage.getItem('klaus_vistos_recentemente')) || []; } catch (e) { vistos = []; }
+    vistos = vistos.filter(item => item.id !== p.id);
+    vistos.unshift(p);
+    if (vistos.length > 20) vistos = vistos.slice(0, 20);
+    localStorage.setItem('klaus_vistos_recentemente', JSON.stringify(vistos));
+  }
+
+  function renderizarVistosRecentemente() {
+    const container = document.getElementById('lista-vistos');
+    if (!container) return;
+    let vistos = [];
+    try { vistos = JSON.parse(localStorage.getItem('klaus_vistos_recentemente')) || []; } catch (e) { vistos = []; }
+
+    if (!vistos.length) {
+      container.className = 'page-empty';
+      container.innerHTML = `
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <p>Nenhum produto visualizado ainda</p>`;
+      return;
+    }
+
+    container.className = 'products-grid';
+    container.innerHTML = vistos.map(p => `
+      <div class="product-card" onclick="abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})" style="cursor:pointer;">
+        <div class="product-img">
+          ${p.imagem_url ? `<img src="${p.imagem_url}" alt="${p.nome}" style="width:100%;height:100%;object-fit:cover;">` : `<div class="product-img-bg" style="background:#ececec;font-size:60px;">🧥</div>`}
+          ${p.tag ? `<div class="product-tag">${p.tag}</div>` : ''}
+        </div>
+        <div class="product-info">
+          <p class="product-name">${p.nome}</p>
+          <p class="product-price">R$ ${Number(p.preco).toFixed(2).replace('.', ',')}</p>
+          <button class="product-add-btn" onclick="event.stopPropagation(); abrirProduto(${JSON.stringify(p).replace(/"/g, '&quot;')})">Ver produto</button>
+        </div>
+      </div>`).join('');
   }
 
   function selecionarTamanho(btn, tam) {
@@ -3141,7 +3141,7 @@
           ${i.imagem_url ? `<img src="${i.imagem_url}" style="width:100%;height:100%;object-fit:cover;">` : '🧥'}
         </div>
         <div style="flex:1;">
-          <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;">${i.nome}</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.78rem;letter-spacing:0.08em;">${i.nome}</p>
           <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:0.78rem;margin-top:3px;">R$ ${(Number(i.preco)*i.qty).toFixed(2).replace('.',',')}</p>
         </div>
       </div>`).join('');
@@ -3377,12 +3377,12 @@
       lista.innerHTML = pedidos.map(p => `
         <div style="border:1px solid var(--light);padding:20px 24px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
           <div>
-            <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;">#${p.numero}</p>
+            <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:0.82rem;letter-spacing:0.08em;">#${p.numero}</p>
             <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.75rem;color:var(--mid);margin-top:4px;">${new Date(p.criado_em).toLocaleDateString('pt-BR')}</p>
           </div>
           <div style="text-align:right;">
             <p style="font-family:'Inter',sans-serif;font-weight:500;font-size:0.88rem;">R$ ${Number(p.total).toFixed(2).replace('.',',')}</p>
-            <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;color:var(--mid);margin-top:4px;text-transform:uppercase;letter-spacing:0.1em;">${p.status.replace(/_/g,' ')}</p>
+            <p style="font-family:'Inter',sans-serif;font-weight:300;font-size:0.72rem;color:var(--mid);margin-top:4px;letter-spacing:0.1em;">${p.status.replace(/_/g,' ')}</p>
           </div>
         </div>`).join('');
     } catch(e) {
