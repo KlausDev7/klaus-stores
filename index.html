@@ -2784,10 +2784,10 @@
 
   // ── VISTOS RECENTEMENTE ──
   function salvarVistoRecentemente(p) {
-    if (!p || (p.id === undefined && p.id !== 0)) return;
+    if (!p || !p.nome) return;
     let vistos = [];
     try { vistos = JSON.parse(localStorage.getItem('klaus_vistos_recentemente')) || []; } catch (e) { vistos = []; }
-    vistos = vistos.filter(item => item.id !== p.id);
+    vistos = vistos.filter(item => item.nome !== p.nome);
     vistos.unshift(p);
     if (vistos.length > 20) vistos = vistos.slice(0, 20);
     localStorage.setItem('klaus_vistos_recentemente', JSON.stringify(vistos));
